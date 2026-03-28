@@ -13,7 +13,7 @@
     "ai-appointment-manager": {
       "name": "AI 预约管家",
       "file": "ai-appointment-manager.md",
-      "status": "in-progress",
+      "status": "high-value",
       "scores": {
         "technicalFeasibility": 8,
         "marketDemand": 9,
@@ -23,13 +23,12 @@
       },
       "totalScore": 7.8,
       "summary": "多模态预约管理，解决健忘痛点，市场强需求",
-      "priority": 1,
-      "startedAt": "2026-03-29T02:30:00Z"
+      "priority": 1
     },
     "ai-career-soft-skills-coach": {
       "name": "AI 职场软技能导师",
       "file": "ai-career-soft-skills-coach.md",
-      "status": "completed",
+      "status": "high-value",
       "scores": {
         "technicalFeasibility": 9,
         "marketDemand": 8,
@@ -39,8 +38,7 @@
       },
       "totalScore": 8.4,
       "summary": "职场新人刚需，场景模拟训练，B2B/B2C双模式",
-      "priority": 2,
-      "completedAt": "2026-03-29T02:30:00Z"
+      "priority": 2
     },
     "ai-contract-reader": {
       "name": "AI 合同阅读助手",
@@ -438,45 +436,23 @@
   },
   "stats": {
     "total": 29,
-    "highValue": 7,
+    "highValue": 8,
     "inProgress": 1,
-    "completed": 1,
+    "completed": 0,
     "skipped": 21,
     "averageScore": 6.5,
-    "lastDevelopmentUpdate": "2026-03-29T03:15:00Z",
+    "lastDevelopmentUpdate": "2026-03-28T22:50:00Z",
     "developmentProgress": {
       "ai-career-soft-skills-coach": {
-        "phase": "Production Ready",
-        "completion": "100%",
+        "phase": "Frontend Development Complete",
+        "completion": "90%",
         "aiFeaturesImplemented": "8/8",
         "apiEndpoints": "15/15",
         "databaseMigrations": "Completed",
-        "testingStatus": "Complete",
+        "testingStatus": "In Progress",
         "frontendComponents": "5/5",
         "buildSystem": "Vite Complete",
-        "developmentEnvironment": "Production Ready",
-        "deploymentStatus": "GitHub Repository Created",
-        "lastUpdated": "2026-03-29T02:30:00Z"
-      },
-      "ai-appointment-manager": {
-        "phase": "Core AI Features Complete",
-        "completion": "65%",
-        "aiFeaturesImplemented": "5/5",
-        "apiEndpoints": "8/8",
-        "databaseSchema": "Complete with AI fields",
-        "testingStatus": "Framework Ready",
-        "coreFeatures": "Multi-modal recognition, conflict detection, smart reminders",
-        "deploymentStatus": "GitHub Repository Created",
-        "lastUpdated": "2026-03-29T03:15:00Z",
-        "keyAchievements": [
-          "AI Appointment Information Extraction",
-          "Multi-Modal Recognition Service",
-          "Conflict Detection & Analysis",
-          "Smart Reminder Generation",
-          "Natural Language Rescheduling",
-          "Batch Processing Support",
-          "Analytics Dashboard Foundation"
-        ]
+        "developmentEnvironment": "Dual Server Setup"
       }
     }
   },
@@ -484,13 +460,12 @@
     "ai-career-soft-skills-coach": {
       "name": "AI Career Soft Skills Coach",
       "ideaKey": "ai-career-soft-skills-coach",
-      "status": "completed",
+      "status": "development-complete",
       "githubUrl": "https://github.com/ai-ideas-lab/ai-career-soft-skills-coach",
       "localPath": "/Users/wangshihao/projects/openclaws/ai-career-soft-skills-coach",
       "createdAt": "2026-03-28",
-      "updatedAt": "2026-03-29T02:30:00Z",
-      "completedAt": "2026-03-29T02:30:00Z",
-      "phase": "Production Ready",
+      "updatedAt": "2026-03-28T23:47:00Z",
+      "phase": "MVP Complete",
       "progress": {
         "completed": [
           "Project setup and initialization",
@@ -526,72 +501,20 @@
           "Material-UI integration",
           "Frontend build optimization",
           "Production build configuration",
-          "Development testing framework",
-          "Production deployment preparation",
-          "Performance monitoring setup",
-          "Containerization and deployment scripts"
+          "Development testing framework"
         ],
-        "inProgress": [],
+        "inProgress": [
+          "Production deployment preparation",
+          "Testing coverage enhancement",
+          "Performance monitoring setup"
+        ],
         "next": [
+          "Containerization and Docker setup",
           "CI/CD pipeline implementation",
           "Production deployment to cloud",
           "User acceptance testing",
           "Mobile responsiveness optimization",
           "Analytics and monitoring integration"
-        ]
-      }
-    },
-    "ai-appointment-manager": {
-      "name": "AI Appointment Manager",
-      "ideaKey": "ai-appointment-manager",
-      "status": "development-in-progress",
-      "githubUrl": "https://github.com/ai-ideas-lab/ai-appointment-manager",
-      "localPath": "/Users/wangshihao/projects/openclaws/ai-appointment-manager",
-      "createdAt": "2026-03-29",
-      "updatedAt": "2026-03-29T03:15:00Z",
-      "phase": "Core AI Features Complete",
-      "progress": {
-        "completed": [
-          "Project setup and initialization",
-          "GitHub repository creation and push",
-          "Package.json and dependencies",
-          "TypeScript configuration",
-          "Prisma database schema with AI fields",
-          "Environment configuration and setup",
-          "Project structure and base files",
-          "AI Appointment Information Extraction (OpenAI GPT-4)",
-          "Multi-Modal Recognition Service (screenshot, SMS, email, manual)",
-          "Conflict Detection & Analysis algorithms",
-          "Smart Reminder Generation system",
-          "Natural Language Rescheduling message generation",
-          "Batch Processing for multiple recognitions",
-          "Comprehensive appointment management API endpoints",
-          "Development environment setup (dev.sh script)",
-          "Comprehensive documentation and README",
-          "Error handling and logging infrastructure",
-          "Analytics dashboard foundation",
-          "Production deployment scripts"
-        ],
-        "inProgress": [
-          "Mobile application development (React Native)",
-          "Web frontend interface (React + Material-UI)",
-          "Advanced OCR integration (Tesseract.js or cloud services)",
-          "Calendar sync integration (Google, Outlook, Apple)",
-          "Push notification system implementation",
-          "User authentication and authorization system",
-          "Testing framework and unit tests"
-        ],
-        "next": [
-          "Mobile app development for iOS/Android",
-          "Web frontend with responsive design",
-          "Real-time conflict notification system",
-          "Calendar API integration and two-way sync",
-          "Advanced AI features: auto-categorization",
-          "User preference learning and personalization",
-          "Performance optimization and monitoring",
-          "Mobile app store deployment",
-          "Beta testing program setup",
-          "Production deployment to cloud services"
         ]
       }
     }
