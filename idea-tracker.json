@@ -126,7 +126,7 @@
     "ai-interview-coach": {
       "name": "AI 面试场景模拟教练",
       "file": "ai-interview-coach.md",
-      "status": "high-value",
+      "status": "completed",
       "scores": {
         "technicalFeasibility": 8,
         "marketDemand": 9,
@@ -136,7 +136,9 @@
       },
       "totalScore": 8.0,
       "summary": "面试模拟训练，实时反馈，求职者刚需",
-      "priority": 8
+      "priority": 8,
+      "startedAt": "2026-03-29T12:50:00Z",
+      "completedAt": "2026-03-29T12:50:00Z"
     },
     "ai-pr-summary-analyzer": {
       "name": "AI PR 自动摘要与变更影响分析",
@@ -451,12 +453,12 @@
   },
   "stats": {
     "total": 30,
-    "highValue": 6,
+    "highValue": 5,
     "inProgress": 2,
-    "completed": 5,
+    "completed": 6,
     "skipped": 22,
     "averageScore": 6.5,
-    "lastDevelopmentUpdate": "2026-03-29T11:45:00Z",
+    "lastDevelopmentUpdate": "2026-03-29T12:50:00Z",
     "developmentProgress": {
       "ai-career-soft-skills-coach": {
         "phase": "Production Ready",
@@ -955,6 +957,61 @@
           "Integration with calendar systems",
           "Email template system",
           "Advanced analytics dashboard"
+        ]
+      }
+    },
+    "ai-interview-coach": {
+      "name": "AI Interview Coach",
+      "ideaKey": "ai-interview-coach",
+      "status": "completed",
+      "githubUrl": "https://github.com/ai-ideas-lab/ai-interview-coach",
+      "localPath": "/Users/wangshihao/projects/openclaws/ai-interview-coach",
+      "createdAt": "2026-03-29",
+      "updatedAt": "2026-03-29T12:50:00Z",
+      "completedAt": "2026-03-29T12:50:00Z",
+      "phase": "Production Ready",
+      "progress": {
+        "completed": [
+          "Project setup and initialization",
+          "GitHub repository creation and push",
+          "Package.json and dependencies",
+          "TypeScript configuration",
+          "Express + TypeScript backend framework",
+          "Prisma database schema with interview management",
+          "JWT authentication system",
+          "OpenAI GPT-4 integration",
+          "AI-powered interview question generation",
+          "Real-time answer analysis and feedback",
+          "Interview session management",
+          "User progress tracking and analytics",
+          "Comprehensive API endpoints (authentication, interviews, feedback, questions)",
+          "Error handling and logging middleware",
+          "Environment configuration setup",
+          "Development environment scripts",
+          "Comprehensive project documentation",
+          "Question bank with filtering and AI generation",
+          "Multiple interview types (technical, behavioral, case study, system design)",
+          "Personalized question generation based on user preferences",
+          "Detailed feedback system with strengths and improvements",
+          "Real-time scoring and performance analytics",
+          "Practice session creation and management"
+        ],
+        "inProgress": [],
+        "next": [
+          "CI/CD pipeline implementation",
+          "Production deployment to cloud",
+          "React frontend development",
+          "Mobile application development",
+          "Advanced AI features integration",
+          "User feedback collection system",
+          "Performance optimization and monitoring",
+          "Integration with calendar systems",
+          "Advanced analytics dashboard",
+          "User profile management enhancement",
+          "Multi-language support",
+          "Video recording analysis integration",
+          "Voice transcription capabilities",
+          "Advanced question recommendation engine"
         ]
       }
     }
