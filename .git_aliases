@@ -1,0 +1,139 @@
+# 自动生成的Git别名 - 生成时间: Sat Mar 28 09:36:39 CST 2026
+
+# 🎯 基础Git操作
+alias gs='git status'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gco='git checkout'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gca='git commit --amend'
+alias gcam='git commit --amend -m'
+alias gcl='git clone'
+alias gpl='git pull'
+alias gps='git push'
+alias gpsu='git push --set-upstream origin $(git branch --show-current)'
+alias gf='git fetch'
+alias gr='git remote -v'
+
+# 🔍 查看和日志
+alias gl='git log --oneline'
+alias glg='git log --oneline --graph'
+alias glga='git log --oneline --graph --all'
+alias glp='git log --pretty=format:"%h %s (%cr) <%an>"'
+alias glps='git log --pretty=format:"%h %s (%cr) <%an>" --stat'
+alias gls='git log --show-signature'
+alias glf='git log --follow'
+alias gls.='git log --since="1 week ago"'
+alias gls..='git log --until="1 week ago"'
+
+# 📝 分支操作
+alias gbD='git branch -D'
+alias gbd='git branch -d'
+alias gbm='git branch -m'
+alias gbaD='git branch -D'
+alias gbav='git branch -av'
+
+# 🔗 合变操作
+alias gm='git merge'
+alias gms='git merge --squash'
+alias gmr='git merge --no-commit'
+alias gmt='git mergetool'
+alias gmtc='git mergetool --tool=vscode'
+
+# 🔒 标签操作
+alias gtl='git tag'
+alias gtlv='git tag -v'
+alias gtlp='git push --tags'
+alias gtlu='git push --tags -u origin $(git branch --show-current)'
+alias gtlc='git tag -d'
+alias gtlt='git tag -d'
+
+# 📋 暂存和工作区
+alias ga='git add'
+alias gaa='git add --all'
+alias gau='git add --update'
+ gap='git add --patch'
+ alias gav='git add --verbose'
+ alias gash='git stash'
+ alias gashp='git stash pop'
+ alias gasha='git stash apply'
+ alias gashl='git stash list'
+ alias gashd='git stash drop'
+ alias gashc='git stash clear'
+ alias gashs='git stash show'
+
+# 🔄 重置和还原
+alias grs='git reset'
+ alias grsh='git reset --hard'
+ alias grsH='git reset --hard HEAD'
+ alias grsM='git reset --mixed'
+ alias grsS='git reset --soft'
+ alias grss='git reset --soft'
+ alias grs1='git reset HEAD~1'
+ alias grs2='git reset HEAD~2'
+ alias grs3='git reset HEAD~3'
+
+# 📊 对比和差异
+alias gd='git diff --color=always | delta'
+ alias gds='git diff --color=always --staged | delta'
+ alias gdc='git diff --color=always --cached | delta'
+ alias gdh='git diff --color=always HEAD~1 | delta'
+ alias gdt='git diff --color=always @~..@ | delta'
+ alias gdr='git diff --color=always --name-only'
+ alias gdv='git diff --color=always --stat'
+ alias gdw='git diff --color=always --word-diff'
+
+# 🌿 子模块和子树
+alias gsu='git submodule update --init --recursive'
+ alias gsa='git submodule add'
+ alias gss='git submodule status'
+ alias gsr='git submodule remove'
+ alias gsuu='git submodule update --remote'
+ alias gsuuu='git submodule update --remote --merge'
+
+# 🚀 发布和协作
+alias gpr='git pull-request'
+ alias gprv='git pull-request --verbose'
+ alias gprb='git pull-request --base'
+ alias gprh='git pull-request --head'
+ alias gprm='git pull-request --message'
+ alias gpre='git pull-request --edit'
+ alias gprm='git pull-request --message'
+
+# 📋 历史和 blame
+alias glc='git log --follow'
+ alias glc.='git log --follow --oneline'
+ alias glc..='git log --follow --stat'
+ alias glcp='git log --follow --pretty=format:"%h %s (%cr) <%an>"'
+ alias glc.='git log --follow --oneline'
+ alias glc..='git log --follow --stat'
+ alias blam='git blame'
+ alias blamv='git blame -v'
+ alias blamw='git blame -w'
+
+# 🔧 配置和设置
+alias gcfg='git config'
+ alias gcgl='git config --global'
+ alias gcgl.='git config --global --list'
+ alias gcgl..'git config --global --edit'
+ alias gcglk='git config --global --get'
+ alias gcgls='git config --global --set'
+ alias gcgld='git config --global --unset'
+ alias gcgl..='git config --global --edit'
+ alias gcglk='git config --global --get'
+ alias gcgls='git config --global --set'
+ alias gcgld='git config --global --unset'
+
+# 🎯 特殊操作
+ alias g.='git add .'
+ alias g..='git add ..'
+ alias g...='git add ...'
+ alias g....='git add ....'
+ alias gpr='git pull-request'
+ alias gprv='git pull-request --verbose'
+ alias gprb='git pull-request --base'
+ alias gprh='git pull-request --head'
+ alias gprm='git pull-request --message'
+ alias gpre='git pull-request --edit'
+

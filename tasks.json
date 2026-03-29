@@ -1,0 +1,37 @@
+{
+  "tasks": [],
+  "projects": {
+    "cherry-studio": {
+      "name": "Cherry Studio",
+      "description": "Electron AI助手",
+      "tasks": [
+        "task_20260328_083815_710"
+      ],
+      "completed": 0,
+      "total": 1
+    },
+    "ring": {
+      "name": "Ring",
+      "description": "AI导航与介绍",
+      "tasks": [],
+      "completed": 0,
+      "total": 0
+    },
+    "workspace": {
+      "name": "OpenClaw Workspace",
+      "description": "工作空间配置和优化",
+      "tasks": [],
+      "completed": 0,
+      "total": 0
+    }
+  },
+  "stats": {
+    "total_tasks": 1,
+    "completed_tasks": 0,
+    "in_progress_tasks": 0,
+    "overdue_tasks": 0,
+    "productivity_score": 0
+  },
+  "created_at": "$(date -Iseconds)",
+  "updated_at": "$(date -Iseconds)"
+}

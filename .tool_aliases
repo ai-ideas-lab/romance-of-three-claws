@@ -1,0 +1,100 @@
+# 自动生成的工具别名 - 生成时间: Sat Mar 28 09:36:39 CST 2026
+
+# 🎯 基础工具别名
+alias grep='rg --color=always'
+alias cat='bat --style=numbers'
+alias ls='eza'
+alias find='fd'
+alias top='htop'
+
+# 🔍 搜索工具
+alias rg.='rg --color=always'
+ alias rgi.='rg --color=always -i'
+ alias rgl.='rg --color=always -n'
+ alias rgo.='rg --color=always --only-matching'
+
+# 📁 文件操作
+alias ls='eza'
+ alias la='eza -la'
+ alias ll='eza -la'
+ alias l='eza -la'
+ alias l.='eza -la --all'
+ alias l..='eza -la ..'
+ alias l...='eza -la ../..'
+
+# 📝 文本处理
+alias sed='sd'
+ alias seds='sd -i'
+ alias sedg='sd --global'
+ alias sedp='sd --pattern'
+ alias sedr='sd --replace'
+ alias sedw='sd --write'
+
+# 🔗 Git工具
+alias diff='git diff --color=always | delta'
+ alias dif.='git diff --color=always @~..@ | delta'
+ alias difs='git diff --color=always --staged | delta'
+ alias difc='git diff --color=always --cached | delta'
+
+# 🚀 系统工具
+alias ps='procs'
+ alias psm='procs --memory'
+ alias psc='procs --cpu'
+ alias psl='procs --long'
+ alias psg='procs | grep'
+
+# 📊 监控工具
+alias df='dust'
+ alias du='dust'
+ alias dfh='dust --human-readable'
+ alias dft='dust --total'
+
+# 🔄 网络工具
+alias curl='curl -L'
+ alias wget='wget -c'
+ alias curlj='curl -L | jq'
+ alias wgetj='wget -c | jq'
+
+# 📋 管理工具
+alias edit_aliases='$EDITOR ~/.openclaw/workspace/.shell_aliases'
+ alias edit_git_aliases='$EDITOR ~/.openclaw/workspace/.git_aliases'
+ alias edit_tool_aliases='$EDITOR ~/.openclaw/workspace/.tool_aliases'
+
+# 🎉 生产力工具
+alias todo='$EDITOR ~/todos.md'
+ alias notes='$EDITOR ~/notes.md'
+ alias proj='cd ~/projects'
+
+# 🔍 智能查找
+alias find.='fd .'
+ alias findf='fd -t f'
+ alias findd='fd -t d'
+ alias finde='fd -t e'
+ alias findp='fd -t p'
+
+# 📁 智能导航
+alias home='cd ~'
+ alias downloads='cd ~/Downloads'
+ alias documents='cd ~/Documents'
+ alias desktop='cd ~/Desktop'
+ alias code='cd ~/code'
+
+# 🚀 开发工具
+alias dev='$EDITOR ~/.zshrc'
+ alias reload='source ~/.zshrc'
+ alias path='echo $PATH'
+ alias env='env | sort'
+ alias envs='env | sort | less'
+
+# 🎯 自定义快捷操作
+alias cls='clear'
+ alias src='source ~/.zshrc'
+ alias zsh='zsh'
+ alias bash='bash'
+
+# 🌟 特殊功能
+alias weather='weather'
+ alias health='healthcheck'
+ alias system='system-info'
+ alias productivity='ai-productivity-audit'
+

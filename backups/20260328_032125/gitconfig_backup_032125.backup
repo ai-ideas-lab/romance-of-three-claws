@@ -1,0 +1,9 @@
+[user]
+	name = kevinten
+	email = 596823919@qq.com
+[core]
+	autocrlf = input
+[safe]
+	directory = *
+[url "https://github.com/"]
+	insteadOf = ssh://git@github.com/

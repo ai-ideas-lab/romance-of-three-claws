@@ -1,0 +1,107 @@
+=== 环境验证报告 ===
+生成时间: Sat Mar 28 02:23:25 CST 2026
+生成者: 孔明智能助手
+
+=== 系统信息 ===
+操作系统: Darwin 24.6.0
+架构: x86_64
+主机名: wangshihaodeMacBook-Pro.local
+当前用户: wangshihao
+Shell: /bin/zsh
+工作目录: /Users/wangshihao/.openclaw/workspace
+
+=== 硬件信息 ===
+CPU信息:  核心
+内存信息:  总内存
+可用内存: 31719424
+磁盘使用:
+Filesystem        Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk1s5s1   233Gi    10Gi    56Gi    16%    427k  583M    0%   /
+
+=== 开发环境 ===
+Node.js环境:
+  版本: v22.22.1
+  npm版本: 10.9.4
+  全局包数量:        8
+
+Python环境:
+  Python版本: Python 3.10.0
+  pip版本: pip 26.0.1 from /Users/wangshihao/Library/Python/3.10/lib/python/site-packages/pip (python 3.10)
+  虚拟环境: Not installed
+
+Git环境:
+  Git版本: git version 2.39.5 (Apple Git-154)
+  用户名: kevinten
+  邮箱: 596823919@qq.com
+  配置文件位置: user.name=kevinten
+user.email=596823919@qq.com
+
+=== 工具检查 ===
+现代CLI工具:
+  ❌ gh: Not installed
+  ❌ fzf: Not installed
+  ❌ rg: Not installed
+  ❌ eza: Not installed
+  ❌ bat: Not installed
+  ❌ fd: Not installed
+  ❌ dust: Not installed
+  ❌ cargo: Not installed
+
+容器和编排工具:
+  ❌ docker: Not installed
+  ✅ kubectl: 
+  ✅ helm: 
+  ❌ minikube: Not installed
+  ❌ kind: Not installed
+
+开发工具:
+  ✅ vim: VIM - Vi IMproved 9.1 (2024 Jan 02, compiled Sep 29 2025 21:20:03)
+  ❌ neovim: Not installed
+  ✅ yarn: 1.22.22
+  ✅ pnpm: 10.32.1
+  ❌ tsc: Not installed
+  ❌ eslint: Not installed
+  ❌ prettier: Not installed
+
+=== 网络连接检查 ===
+  ✅ https://github.com: Connected
+  ✅ https://registry.npmjs.org: Connected
+  ✅ https://pypi.org: Connected
+
+=== 端口检查 ===
+  🔌 端口 80: 空闲
+  🔌 端口 443: 空闲
+  🔌 端口 3000: 空闲
+  🔌 端口 8000: 空闲
+  🔌 端口 8080: 空闲
+  🔌 端口 5432: 空闲
+  🔌 端口 3306: 空闲
+
+=== 配置文件检查 ===
+  📄 /Users/wangshihao/.zshrc: 存在 (     131 行)
+  📄 /Users/wangshihao/.bashrc: 不存在
+  📄 /Users/wangshihao/.gitconfig: 存在 (       9 行)
+  📄 /Users/wangshihao/.vimrc: 存在 (     124 行)
+  📄 /Users/wangshihao/.shell_aliases: 存在 (      98 行)
+
+=== 环境变量检查 ===
+重要环境变量:
+HOME=/Users/wangshihao
+NODE_EXTRA_CA_CERTS=/etc/ssl/cert.pem
+NODE_NO_WARNINGS=1
+NODE_USE_SYSTEM_CA=1
+OPENCLAW_CONFIG_PATH=/Users/wangshihao/projects/ai/Ring/.openclaw/openclaw.json
+OPENCLAW_PATH_BOOTSTRAPPED=1
+OPENCLAW_SHELL=exec
+PATH=/Users/wangshihao/.nvm/versions/node/v22.22.1/bin:/usr/local/bin:/usr/bin:/bin:/Users/wangshihao/.nvm:/Users/wangshihao/.local/bin:/Users/wangshihao/.npm-global/bin:/Users/wangshihao/bin:/Users/wangshihao/.volta/bin:/Users/wangshihao/.asdf/shims:/Users/wangshihao/.bun/bin:/Users/wangshihao/Library/Application Support/fnm/aliases/default/bin:/Users/wangshihao/.fnm/aliases/default/bin:/Users/wangshihao/Library/pnpm:/Users/wangshihao/.local/share/pnpm:/opt/homebrew/bin
+SHELL=/bin/zsh
+USER=wangshihao
+__CF_USER_TEXT_ENCODING=0x1F5:0x19:0x34
+
+=== 项目检查 ===
+当前目录: /Users/wangshihao/.openclaw/workspace
+子目录数量:        5
+文件数量:       28
+Git仓库: 是
+当前分支: main
+未提交的更改:       30

@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  cherry-studio:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - API_URL=http://backend:5000
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+    restart: unless-stopped
+    networks:
+      - cherry-network
+
+  # Redis缓存服务
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - cherry-network
+
+  # PostgreSQL数据库
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: cherry_studio
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - cherry-network
+
+  # AI服务后端
+  ai-backend:
+    build:
+      context: ../ai-backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - DATABASE_URL=postgresql://admin:secret@postgres:5432/cherry_studio
+      - REDIS_URL=redis://redis:6379
+      - API_KEY=${AI_API_KEY}
+    volumes:
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - cherry-network
+
+volumes:
+  redis_data:
+  postgres_data:
+
+networks:
+  cherry-network:
+    driver: bridge

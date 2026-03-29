@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  ring-app:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - DATABASE_URL=postgresql://admin:secret@postgres:5432/ring
+      - REDIS_URL=redis://redis:6379
+      - AI_API_KEY=${AI_API_KEY}
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+    restart: unless-stopped
+    networks:
+      - ring-network
+
+  # PostgreSQL数据库
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: ring
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - ring-network
+
+  # Redis缓存
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - ring-network
+
+volumes:
+  postgres_data:
+  redis_data:
+
+networks:
+  ring-network:
+    driver: bridge

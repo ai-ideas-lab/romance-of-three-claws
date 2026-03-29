@@ -1,0 +1,114 @@
+# 编辑器工具
+if command -v nvim >/dev/null 2>&1; then
+    alias vim='nvim'
+    alias vi='nvim'
+    alias neovim='nvim'
+fi
+
+# 现代化CLI工具别名
+if command -v eza >/dev/null 2>&1; then
+    alias ls='eza'
+    alias la='eza -la'
+    alias ll='eza -l'
+    alias l='eza -la'
+    alias tree='eza --tree'
+fi
+
+if command -v bat >/dev/null 2>&1; then
+    alias cat='bat'
+    alias less='bat --paging=always'
+fi
+
+if command -v fd >/dev/null 2>&1; then
+    alias find='fd'
+fi
+
+if command -v rg >/dev/null 2>&1; then
+    alias grep='rg'
+fi
+
+if command -v dust >/dev/null 2>&1; then
+    alias du='dust'
+fi
+
+if command -v procs >/dev/null 2>&1; then
+    alias ps='procs'
+fi
+
+if command -v zoxide >/dev/null 2>&1; then
+    eval "$(zoxide init zsh)"
+fi
+
+if command -v sd >/dev/null 2>&1; then
+    alias sed='sd'
+fi
+
+if command -v gh >/dev/null 2>&1; then
+    alias gh='gh'
+fi
+
+# 系统监控工具
+if command -v htop >/dev/null 2>&1; then
+    alias top='htop'
+fi
+
+if command -v glances >/dev/null 2>&1; then
+    alias glances='glances'
+fi
+
+# 文件操作工具
+if command -v jq >/dev/null 2>&1; then
+    alias json='jq'
+fi
+
+if command -v fzf >/dev/null 2>&1; then
+    alias fzf='fzf'
+fi
+
+# 开发工具
+if command -v nvim >/dev/null 2>&1; then
+    alias n='nvim'
+    alias nv='nvim'
+fi
+
+# 网络工具
+if command -v curl >/dev/null 2>&1; then
+    alias curl='curl -L'
+fi
+
+if command -v wget >/dev/null 2>&1; then
+    alias wget='wget -c'
+fi
+
+# 检查命令是否存在的函数
+check_command() {
+    if command -v "$1" >/dev/null 2>&1; then
+        echo "✅ $1 已安装"
+        return 0
+    else
+        echo "❌ $1 未安装"
+        return 1
+    fi
+}
+
+# 批量工具检查函数
+check_all_tools() {
+    echo "🔍 正在检查所有工具安装状态..."
+    check_command gh
+    check_command fzf
+    check_command rg
+    check_command eza
+    check_command bat
+    check_command fd
+    check_command dust
+    check_command jq
+    check_command tree
+    check_command htop
+    check_command ack
+    check_command nvim
+    check_command tmux
+    check_command procs
+    check_command zoxide
+    check_command sd
+    echo "✅ 工具检查完成"
+}

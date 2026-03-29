@@ -1,0 +1,111 @@
+# Git 别名配置
+# 适用于git命令行工具
+
+# 基础操作
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline'
+alias gd='git diff'
+alias gco='git checkout'
+alias gb='git branch'
+alias gm='git merge'
+
+# 高级操作
+alias gcam='git commit -am'
+alias gpf='git push --force'
+alias gpl='git pull'
+alias gcl='git clone'
+alias gr='git remote'
+alias grv='git remote -v'
+
+# 分支管理
+gba='git branch -a'
+gbd='git branch -d'
+gbD='git branch -D'
+
+# 日志查看
+glog='git log --oneline --graph --decorate --all'
+glogs='git log --oneline --stat'
+glogp='git log --pretty=format:"%h %s %an" --graph'
+
+# 状态检查
+gss='git status -s'
+gsh='git show'
+gsta='git stash'
+gstl='git stash list'
+gstd='git stash drop'
+
+# 重置操作
+grh='git reset HEAD'
+grhh='git reset HEAD --hard'
+grs='git reset HEAD~1'
+
+# Delta增强 (如果安装了delta)
+if command -v delta >/dev/null 2>&1; then
+    alias gd='git diff --color=always | delta'
+    alias gds='git diff --staged --color=always | delta'
+    alias gl='git log --oneline --color=always | delta'
+fi
+
+# 代码搜索
+alias gsearch='git log --oneline --grep'
+alias gauthor='git log --author'
+alias gfile='git log --name-only'
+
+# 标签管理
+alias gtag='git tag'
+alias gtags='git tag -l'
+alias gtagv='git show'
+
+# 子模块
+alias gsub='git submodule'
+alias gsubup='git submodule update --init --recursive'
+
+# 重写历史
+alias grebase='git rebase'
+alias grebasei='git rebase -i'
+alias greset='git reset'
+alias greseth='git reset --hard'
+
+# 合并与变基
+alias gmerge='git merge'
+alias gmerges='git merge --squash'
+alias gcontinue='git rebase --continue'
+gabort='git rebase --abort'
+
+# 临时操作
+alias gdiscard='git checkout --'
+alias gremove='git rm'
+alias gremoterm='git remote remove'
+
+# 统计信息
+alias gstat='git log --stat --oneline'
+alias gshortstat='git shortlog -sn'
+alias gcontrib='git shortlog -sn'
+gauthors='git log --format="%an" | sort | uniq -c | sort -nr'
+
+# 调试和帮助
+alias ghelp='git help'
+alias gman='git help'
+gconfig='git config'
+
+# 其他有用别名
+alias gfetch='git fetch --all'
+alias gclean='git clean -fd'
+alias gignore='git update-index --assume-unchanged'
+alias gunignore='git update-index --no-assume-unchanged'
+alias gignored='git ls-files -v | grep "^[[:lower:]]"'
+
+# 实用工具
+alias gcount='git rev-list --count'
+gwc='git wc -l'
+gwho='git shortlog -s -n'
+ggraph='git log --graph --oneline --all'
+gshowtree='git log --graph --all --pretty=format:"%h %ad | %s%d [%an]" --date=short'
+
+# 仓库信息
+ginfo='git remote -v'
+gstatus='git status --porcelain'
+gbranches='git branch -a'

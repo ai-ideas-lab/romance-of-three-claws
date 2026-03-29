@@ -1,0 +1,22 @@
+# 工具智能配置 - 自动生成于 Sat Mar 28 01:52:33 CST 2026
+
+
+# 工具检测函数
+check_tool() {
+    local tool=$1
+    if command -v "$tool" >/dev/null 2>&1; then
+        echo "✅ $tool: 可用"
+        return 0
+    else
+        echo "❌ $tool: 不可用"
+        return 1
+    fi
+}
+
+# 快速工具检查
+check_all_tools() {
+    echo "🔍 检查所有可用工具:"
+    for tool in eza bat fd dust ripgrep gh cargo; do
+        check_tool "$tool"
+    done
+}

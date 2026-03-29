@@ -1,0 +1,175 @@
+# 自动生成的Shell别名 - 生成时间: Sat Mar 28 09:36:39 CST 2026
+
+# 🎯 工具检查函数
+check_command() {
+    if command -v "$1" >/dev/null 2>&1; then
+        echo "✅ $1: $(which "$1")"
+        return 0
+    else
+        echo "❌ $1: 未安装"
+        return 1
+    fi
+}
+
+# 📊 全工具状态检查
+check_all_tools() {
+    echo "🔍 全工具状态检查 - $(date)"
+    echo "=================================="
+    
+    # 基础工具
+    echo "🔧 基础工具:"
+    check_command git
+    check_command gh
+    check_command docker
+    check_command kubectl
+    check_command helm
+    
+    # 搜索工具
+    echo ""
+    echo "🔍 搜索工具:"
+    check_command rg
+    check_command fzf
+    check_command ack
+    
+    # 文件管理工具
+    echo ""
+    echo "📁 文件管理工具:"
+    check_command eza
+    check_command bat
+    check_command fd
+    check_command dust
+    check_command tree
+    
+    # 编辑器
+    echo ""
+    echo "✏️ 编辑器:"
+    check_command nvim
+    check_command vim
+    
+    # 系统工具
+    echo ""
+    echo "💻 系统工具:"
+    check_command htop
+    check_command procs
+    check_command tmux
+    
+    # 文本处理工具
+    echo ""
+    echo "📝 文本处理工具:"
+    check_command jq
+    check_command sd
+    check_command zoxide
+    
+    # Git工具
+    echo ""
+    echo "🔗 Git工具:"
+    check_command delta
+    
+    echo ""
+    echo "📊 检查完成 - 总计工具数: $(check_command | grep -c '✅' || echo '0')"
+}
+
+# 🎯 基础操作别名
+alias ll='eza -la'
+alias la='eza -la'
+alias l='eza -la'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# 🔍 文件操作
+alias f='fzf'
+alias fd='fd .'
+alias fdc='fd --color=always'
+alias fdd='fd --type directory'
+alias fde='fd --type executable'
+
+# 📁 目录操作
+alias md='mkdir -p'
+alias rd='rmdir'
+alias rmr='rm -rf'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# 🔍 搜索操作
+alias rg='rg --color=always'
+alias rgl='rg --color=always -n'
+alias rgi='rg --color=always -i'
+alias rgo='rg --color=always --only-matching'
+alias rgl.='rg --color=always -n .'
+
+# 📝 文本编辑
+alias edit='$EDITOR'
+alias vim='nvim'
+alias vi='nvim'
+alias n='nvim'
+
+# 💻 系统操作
+alias top='htop'
+alias ps='procs'
+alias psg='procs | grep'
+alias psl='procs -l'
+
+# 🔗 Git操作
+alias gs='git status'
+alias gl='git log --oneline'
+alias glg='git log --oneline --graph'
+alias glga='git log --oneline --graph --all'
+alias gd='git diff --color=always | delta'
+alias gds='git diff --color=always --staged | delta'
+alias gdc='git diff --color=always --cached | delta'
+alias gdh='git diff --color=always HEAD~1 | delta'
+alias gdt='git diff --color=always @~..@ | delta'
+
+# 🚀 项目操作
+alias root='git rev-parse --show-toplevel'
+alias repo='cd $(git rev-parse --show-toplevel)'
+alias current_branch='git branch --show-current'
+
+# 📊 监控工具
+alias df='dust'
+alias du='dust'
+alias duf='dust .'
+alias dus='dust --summarize'
+
+# 🔄 网络工具
+alias ping='ping -c 5'
+alias curl='curl -L'
+alias wget='wget -c'
+
+# 📋 历史命令
+alias h='history'
+alias hi='history | fzf'
+alias hc='history -c'
+
+# 🎯 自定义快捷操作
+alias cls='clear'
+alias src='source ~/.zshrc'
+alias zsh='zsh'
+alias bash='bash'
+alias edit_aliases='$EDITOR ~/.openclaw/workspace/.shell_aliases'
+alias edit_git_aliases='$EDITOR ~/.openclaw/workspace/.git_aliases'
+
+# 🎉 生产力工具
+alias todo='$EDITOR ~/todos.md'
+alias notes='$EDITOR ~/notes.md'
+alias proj='cd ~/projects'
+
+# 🔍 智能查找
+alias find='fd .'
+alias findf='fd -t f'
+alias findd='fd -t d'
+alias finde='fd -t e'
+
+# 📁 智能导航
+alias home='cd ~'
+alias downloads='cd ~/Downloads'
+alias documents='cd ~/Documents'
+alias desktop='cd ~/Desktop'
+
+# 🚀 开发工具
+alias dev='$EDITOR ~/.zshrc'
+alias reload='source ~/.zshrc'
+alias path='echo $PATH'
+alias env='env | sort'
+

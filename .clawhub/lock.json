@@ -1,0 +1,65 @@
+{
+  "version": 1,
+  "skills": {
+    "healthcheck-ready": {
+      "version": "1.0.0",
+      "installedAt": 1774636867728
+    },
+    "context-driven-development": {
+      "version": "1.0.0",
+      "installedAt": 1774641781952
+    },
+    "task-development-workflow": {
+      "version": "1.0.0",
+      "installedAt": 1774641785043
+    },
+    "vibe-coding-workflow": {
+      "version": "1.0.0",
+      "installedAt": 1774644181930
+    },
+    "node-connect": {
+      "version": "1.0.0",
+      "installedAt": 1774647301992
+    },
+    "weather": {
+      "version": "1.0.0",
+      "installedAt": 1774647302155
+    },
+    "healthcheck": {
+      "version": "1.0.2",
+      "installedAt": 1774647363723
+    },
+    "skill-creator": {
+      "version": "0.1.0",
+      "installedAt": 1774647363989
+    },
+    "git-essentials": {
+      "version": "1.0.0",
+      "installedAt": 1774648261919
+    },
+    "personal-productivity": {
+      "version": "1.0.0",
+      "installedAt": 1774648262479
+    },
+    "ai-productivity-audit": {
+      "version": "1.1.0",
+      "installedAt": 1774654204791
+    },
+    "system-info": {
+      "version": "1.0.0",
+      "installedAt": 1774654262742
+    },
+    "monitoring": {
+      "version": "1.0.0",
+      "installedAt": 1774662602711
+    },
+    "docker-essentials": {
+      "version": "1.0.0",
+      "installedAt": 1774664404130
+    },
+    "docker-ctl": {
+      "version": "1.0.0",
+      "installedAt": 1774664523060
+    }
+  }
+}
