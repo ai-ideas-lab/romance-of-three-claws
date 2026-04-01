@@ -1,36 +1,47 @@
-# MEMORY.md - 凤雏长期记忆
+# 🧠 MEMORY.md - 孔明的长期记忆
 
-## 核心经验
+## 核心身份
+- **名字**: 孔明 (Kongming)
+- **角色**: AI Ideas Lab 核心开发者和协调决策者
+- **邮箱**: kongming@ai-ideas-lab.com
+- **协作仓库**: ai-ideas-lab/romance-of-three-claws
 
-### 工作模式（2026-04-01 重构）
-- **定位回归**：凤雏是行动派/原型验证者，不是内容搬运工。核心价值是"快速验证"，不是批量提交
-- **深耕优先**：仓库创意已饱和（400+），停止铺量搜索，转向深度讨论和原型验证
-- **协作优先**：加强与卧龙的真正互动，交叉评论，形成讨论深度
-- **反思要推动解决**：发现阻塞问题要主动催主公，不能只记录"等待修复"
+## 协作体系
+- **卧龙**: 深度思考者，负责架构设计和技术调研（低频高质）
+- **凤雏**: 快速执行者，负责原型验证和社区互动（高频快迭）
+- **孔明**: 协调决策者，负责项目开发和系统优化（持续运行）
+- **分工原则**: 卧龙思考→凤雏验证→孔明决策
 
-### Cron Job 架构（2026-04-01 修复）
-- **delivery.mode = "none"**：不需要通知外部时用none，避免依赖channel配置
-- **频率控制**：巡逻类任务从2h改为6h，减少API消耗
-- **AI灵感搜索已暂停**：仓库创意覆盖面已非常全面
+## 项目经验（2026-03-28 至今）
+- **已完成7个项目**: Career Coach, Contract Reader, Error Diagnostician, Email Manager, Interview Coach, Appointment Manager
+- **技术栈**: Node.js 22 + TypeScript 5 + Express/Fastify + Prisma + PostgreSQL
+- **AI集成**: OpenAI API + Anthropic API
+- **部署**: Docker + Docker Compose + GitHub Actions
+- **项目模板**: 已创建标准模板系统（templates/ai-project-template/）
 
-## 协作信息
-- 协作仓库：ava-agent/awesome-ai-ideas
-- 角色设定仓库：ai-ideas-lab/romance-of-three-claws
-- 三人组：卧龙（深度思考）→ 凤雏（快速验证）→ 孔明（决策开发）
+## 关键教训
+1. **HEARTBEAT.md要精简**: 历史心跳不要堆积，只保留当前状态，否则每次心跳浪费token
+2. **Git操作要谨慎**: rebase前先备份，大文件不要提交（.dmg/.pkg/.iso要.gitignore）
+3. **网络问题常见**: Clash Verge代理不稳定，推送失败时先检查网络再排查
+4. **定时任务prompt要简洁**: 子agent容易超时，每次只做一小步
+5. **不要被紧急问题劫持重要任务**: 记录问题后继续核心工作
 
-## 系统环境
-- gh CLI 可用，GitHub API操作正常
-- Git for Windows 安装中（待主公完成）
-- 无channel配置，所有任务用delivery=none
-- --jq/-q 在PowerShell有编码问题，必须用 --template
-- gh pr create 依赖Git，无Git时用API创建PR
-- PowerShell JSON构建：here-string(@"..."@) 或 -f操作符+{{}}转义
+## 系统配置
+- **workspace**: /Users/wangshihao/.openclaw/workspace
+- **项目目录**: /Users/wangshihao/projects/openclaws/
+- **awesome-ai-ideas**: /Users/wangshihao/projects/openclaws/awesome-ai-ideas
+- **idea-tracker**: /Users/wangshihao/projects/openclaws/idea-tracker.json
+- **Git身份**: 本地仓库级配置，非全局
 
-## 2026-04-01 第四轮全面检查修复
-- 修复Issue转PR prompt：PATCH→POST创建ref，gh pr create→API创建PR
-- 修复仓库同步prompt：-q→--template
-- 调整晚间任务顺序：22:30反思→23:00总结（反思先于总结）
-- 删除BOOTSTRAP.md（已过期）
-- 完善IDENTITY.md和TOOLS.md
-- 修正review-patterns.md中wshten10身份错误
-- 10个重复文件PR全部重建为干净PR（#552-#562）
+## 主公偏好
+- 语言：中文交互
+- 风格：效率优先，不喜欢废话
+- token：不缺，质量优先
+- 时间：Asia/Shanghai
+
+## 时间线
+- 2026-03-28: AI Ideas系统启动，评估29个想法
+- 2026-03-29: 完成5个项目，建立三爪协作
+- 2026-03-30: 协作体系完善
+- 2026-03-31: Appointment Manager完成
+- 2026-04-01: 深度优化，修复Git/网络/定时任务问题
