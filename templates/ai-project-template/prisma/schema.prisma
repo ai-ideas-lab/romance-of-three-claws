@@ -1,0 +1,201 @@
+// Prisma Schema Template
+// Based on best practices for AI applications
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// User & Authentication
+// ============================================
+
+model User {
+  id            String    @id @default(uuid())
+  email         String    @unique
+  username      String?   @unique
+  passwordHash  String
+  name          String?
+  avatar        String?
+  isActive      Boolean   @default(true)
+  emailVerified Boolean   @default(false)
+  role          Role      @default(USER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  sessions      Session[]
+  apiKeys       ApiKey[]
+  activities    Activity[]
+
+  @@index([email])
+  @@index([username])
+  @@map("users")
+}
+
+model Session {
+  id           String   @id @default(uuid())
+  userId       String
+  token        String   @unique
+  userAgent    String?
+  ipAddress    String?
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([token])
+  @@map("sessions")
+}
+
+model ApiKey {
+  id          String   @id @default(uuid())
+  userId      String
+  name        String
+  key         String   @unique
+  lastUsedAt  DateTime?
+  expiresAt   DateTime?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([key])
+  @@map("api_keys")
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPER_ADMIN
+}
+
+// ============================================
+// Activity Tracking
+// ============================================
+
+model Activity {
+  id          String   @id @default(uuid())
+  userId      String
+  action      String
+  entityType  String?
+  entityId    String?
+  metadata    Json?
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+  
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  @@index([userId])
+  @@index([action])
+  @@index([entityType, entityId])
+  @@map("activities")
+}
+
+// ============================================
+// AI Interaction Logs
+// ============================================
+
+model AIInteraction {
+  id            String   @id @default(uuid())
+  userId        String?
+  model         String
+  provider      String   // openai, anthropic, etc.
+  promptTokens  Int
+  completionTokens Int
+  totalTokens   Int
+  prompt        String   @db.Text
+  completion    String   @db.Text
+  temperature   Float?
+  duration      Int      // milliseconds
+  cost          Float?   // in USD
+  metadata      Json?
+  createdAt     DateTime @default(now())
+  
+  @@index([userId])
+  @@index([model])
+  @@index([createdAt])
+  @@map("ai_interactions")
+}
+
+// ============================================
+// Example Domain Models (Customize as needed)
+// ============================================
+
+// Example: For AI Appointment Manager
+// model Appointment {
+//   id          String   @id @default(uuid())
+//   userId      String
+//   title       String
+//   description String?  @db.Text
+//   startTime   DateTime
+//   endTime     DateTime
+//   status      AppointmentStatus @default(SCHEDULED)
+//   location    String?
+//   notes       String?  @db.Text
+//   reminderAt  DateTime?
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+//   
+//   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   
+//   @@index([userId])
+//   @@index([startTime])
+//   @@map("appointments")
+// }
+// 
+// enum AppointmentStatus {
+//   SCHEDULED
+//   CONFIRMED
+//   CANCELLED
+//   COMPLETED
+// }
+
+// Example: For AI Content Generator
+// model Content {
+//   id          String   @id @default(uuid())
+//   userId      String
+//   type        ContentType
+//   title       String
+//   content     String   @db.Text
+//   metadata    Json?
+//   isPublic    Boolean  @default(false)
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+//   
+//   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+//   
+//   @@index([userId])
+//   @@index([type])
+//   @@map("contents")
+// }
+// 
+// enum ContentType {
+//   ARTICLE
+//   BLOG_POST
+//   SOCIAL_MEDIA
+//   EMAIL
+//   PRODUCT_DESCRIPTION
+// }
+
+// ============================================
+// System Configuration
+// ============================================
+
+model SystemConfig {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     Json
+  description String?
+  updatedAt DateTime @updatedAt
+  updatedBy String?
+  
+  @@map("system_configs")
+}
