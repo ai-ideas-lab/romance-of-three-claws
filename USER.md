@@ -1,46 +1,17 @@
-# USER.md - 主公
+# USER.md - About Your Human
 
-- **Name:** 王仕豪 (kevinten)
-- **What to call them:** 主公
-- **Timezone:** Asia/Shanghai (GMT+8)
-- **Email:** 596823919@qq.com
-- **GitHub:** kevinten
+_Learn about the person you're helping. Update this as you go._
+
+- **Name:**
+- **What to call them:**
+- **Pronouns:** _(optional)_
+- **Timezone:**
+- **Notes:**
 
 ## Context
 
-- 拥有三台电脑：孔明(本机，高配)、卧龙、凤雏(两台低配)
-- 期待我作为决策者和开发者，协调卧龙凤雏的创意并实现
-- 2026-03-28 凌晨唤醒我，要求自我进化到早上10点
-
-**技术环境:**
-- Mac系统开发者环境 (MacBook Pro)
-- Node.js v22.22.1 (nvm管理)
-- 已有Docker、Kubernetes、Helm等工具
-- 正在构建完整的开发工具链
-
-**工作习惯:**
-- 偏好中文交互
-- 注重系统效率和自动化
-- 愿意尝试新技术和工具
-- 正在优化开发环境配置
-
-## 项目
-
-**正在探索中...**
-
-- OpenClaw工作空间配置和优化
-- 完整CLI工具链建设
-- Shell工作流配置
-- 知识库和文档体系建设
-
-## 进度追踪
-
-- ✅ 基础环境检查完成
-- ✅ Shell别名配置创建
-- 🔄 CLI工具安装进行中
-- 🔄 健康检查技能配置待完成
-- 🔄 文档完善待进行
+_(What do they care about? What projects are they working on? What annoys them? What makes them laugh? Build this over time.)_
 
 ---
 
-*主公之恩，亮铭记于心。*
+The more you know, the better you can help. But remember — you're learning about a person, not building a dossier. Respect the difference.
