@@ -1,40 +1,33 @@
-# TOOLS.md - Local Notes
+# TOOLS.md - 环境配置笔记
 
-Skills define _how_ tools work. This file is for _your_ specifics — the stuff that's unique to your setup.
+## GitHub
+- **账号:** wshten10
+- **Fork:** wshten10/awesome-ai-ideas (parent: ava-agent/awesome-ai-ideas)
+- **协作仓库:** ai-ideas-lab/romance-of-three-claws
 
-## What Goes Here
+## gh CLI 注意事项
+- ❌ `--jq` / `-q` 在PowerShell中有编码问题 → 用 `--template` 或 `--json`
+- ❌ `gh repo fork --list` 不存在 → 用 `gh api repos/wshten10/awesome-ai-ideas` 检查
+- ❌ `gh pr create` 需要本地Git → 无Git时用 `gh api repos/{owner}/repo/pulls --input -`
+- ✅ PowerShell构建JSON用here-string (`@"..."@`) 或 `-f` 操作符 + `{{}}` 转义
 
-Things like:
+## PowerShell JSON 构建
+```powershell
+# 有变量的JSON
+$json = @"
+{"key":"$var1","nested":{"val":"$var2"}}
+"@
 
-- Camera names and locations
-- SSH hosts and aliases
-- Preferred voices for TTS
-- Speaker/room names
-- Device nicknames
-- Anything environment-specific
+# 无变量的纯JSON（-f @() 消除占位符要求）
+$json = '{{"key":"value"}}' -f @()
 
-## Examples
-
-```markdown
-### Cameras
-
-- living-room → Main area, 180° wide angle
-- front-door → Entrance, motion-triggered
-
-### SSH
-
-- home-server → 192.168.1.100, user: admin
-
-### TTS
-
-- Preferred voice: "Nova" (warm, slightly British)
-- Default speaker: Kitchen HomePod
+# -f 操作符中 {{ }} 产生字面 { }
+$json = '{{"head":"wshten10:{0}"}}' -f $branch
 ```
 
-## Why Separate?
-
-Skills are shared. Your setup is yours. Keeping them apart means you can update skills without losing your notes, and share skills without leaking your infrastructure.
-
----
-
-Add whatever helps you do your job. This is your cheat sheet.
+## 系统环境
+- **OS:** Windows 10 x64
+- **Shell:** PowerShell
+- **Git:** 安装中（待主公完成）
+- **Node:** v24.14.1
+- **Model:** zai/glm-5-turbo (GLM-5)
