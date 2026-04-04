@@ -1,17 +1,14 @@
 {
   "lastChecks": {
-    "heartbeat": 1743747189,
-    "git_status": 1743747189
+    "heartbeat": 1743747177
   },
-  "notes": "romance-of-three-claws 推送被阻塞（远程有新提交，网络慢导致pull超时）",
-  "lastUpdate": "2026-04-04 13:33",
+  "notes": "网络问题持续（HTTP/2 errors），2个仓库共2 commits待推送",
+  "lastUpdate": "2026-04-04 13:52",
   "pending": {
-    "romance-of-three-claws": {
-      "status": "blocked",
-      "issue": "needs git pull --rebase before push",
-      "local_commits": 1,
-      "network": "slow"
-    }
-  },
-  "next_action": "手动处理 romance-of-three-claws: git pull --rebase && git push"
+    "repos_with_commits": [
+      "romance-of-three-claws (1 commit)",
+      "workspace (1 commit)"
+    ],
+    "reason": "GitHub network errors (HTTP/2 stream, RPC failed)"
+  }
 }
