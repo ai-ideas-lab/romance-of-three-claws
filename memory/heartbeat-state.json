@@ -1,23 +1,17 @@
 {
   "lastChecks": {
-    "heartbeat": 1743743966,
-    "git_status": 1743743966
+    "heartbeat": 1743747189,
+    "git_status": 1743747189
   },
-  "notes": "网络间歇性超时，2个仓库各有1 commit待推送",
-  "lastUpdate": "2026-04-04 12:59",
+  "notes": "romance-of-three-claws 推送被阻塞（远程有新提交，网络慢导致pull超时）",
+  "lastUpdate": "2026-04-04 13:33",
   "pending": {
-    "git_push": {
-      "repos": [
-        "ai-workspace-orchestrator (1 commit)",
-        "romance-of-three-claws (1 commit)"
-      ],
-      "reason": "GitHub网络超时（RPC failed, curl 56）",
-      "action": "等待网络稳定后自动重试或手动推送"
+    "romance-of-three-claws": {
+      "status": "blocked",
+      "issue": "needs git pull --rebase before push",
+      "local_commits": 1,
+      "network": "slow"
     }
   },
-  "next_scheduled": {
-    "awesome_ai_ideas_cleanup": "2026-04-05 09:00",
-    "social_media_content": "2026-04-05 22:00"
-  },
-  "workspace_status": "clean and synced"
+  "next_action": "手动处理 romance-of-three-claws: git pull --rebase && git push"
 }
