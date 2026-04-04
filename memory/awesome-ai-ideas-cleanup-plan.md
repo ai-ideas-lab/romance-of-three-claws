@@ -1,96 +1,187 @@
 # awesome-ai-ideas 项目整理方案
 
-## 当前问题
-- 根目录有33个.md文件，过于混乱
-- 包括10个PR文档、20个AI想法文档
-- 难以区分核心文档和项目文档
+## 当前问题分析
+
+### 根目录文件统计
+- **27个.md文件**：报告、配置、文档
+- **40个.sh脚本**：安装、配置、工具脚本
+- **多个目录**：ai-*项目、docs、backups等
+
+### 主要问题
+1. **报告文件散落**：final_*.md, *_report.md等应归档
+2. **脚本文件混乱**：40个.sh脚本应分类整理
+3. **配置文件暴露**：OpenClaw配置文件不应在根目录
+
+---
 
 ## 整理方案
 
-### 目录结构设计
+### 目标目录结构
 ```
 awesome-ai-ideas/
-├── README.md              # 主文档（保留）
-├── README_EN.md           # 英文文档（保留）
-├── LICENSE                # 许可证（保留）
-├── TEMPLATE.md            # 模板（保留）
-├── GITHUB_ABOUT_GUIDE.md  # GitHub指南（保留）
-├── docs/
-│   ├── ideas/             # AI想法文档
-│   │   ├── ai-*.md
-│   │   └── README.md      # 目录索引
-│   ├── pr/                # PR提案文档
-│   │   ├── PR-*.md
-│   │   └── README.md      # 目录索引
-│   └── archive/           # 历史文档
-│       └── README_backup.md
-└── [其他现有目录保持不变]
+├── README.md                    # 主文档（保留）
+├── LICENSE                      # 许可证（如果有）
+├── docs/                        # 文档目录
+│   ├── reports/                 # 报告文档
+│   │   ├── final-*.md
+│   │   ├── *_report.md
+│   │   └── evolution-*.md
+│   └── guides/                  # 指南文档
+│       └── backup_skills_strategy.md
+├── scripts/                     # 脚本目录
+│   ├── install/                 # 安装脚本
+│   │   ├── *_installer.sh
+│   │   └── cli_tools_installer.sh
+│   ├── config/                  # 配置脚本
+│   │   ├── config_optimizer*.sh
+│   │   └── ai_project_config.sh
+│   ├── docker/                  # Docker脚本
+│   │   └── docker_*.sh
+│   └── utils/                   # 工具脚本
+│       ├── env_*.sh
+│       └── check_*.sh
+├── .openclaw/                   # OpenClaw配置（隐藏目录）
+│   ├── AGENTS.md
+│   ├── BOOTSTRAP.md
+│   ├── HEARTBEAT.md
+│   ├── IDENTITY.md
+│   ├── MEMORY.md
+│   ├── SOUL.md
+│   ├── TOOLS.md
+│   ├── TOOL_UPDATE.md
+│   └── USER.md
+├── projects/                    # AI项目目录
+│   ├── ai-family-health-guardian/
+│   ├── ai-ideas-system/
+│   └── ai-workspace-orchestrator/
+└── [其他现有目录]
 ```
 
-### 整理规则
+---
 
-#### 保留在根目录
-- README.md
-- README_EN.md
-- LICENSE
-- TEMPLATE.md
-- GITHUB_ABOUT_GUIDE.md
+## 自动化任务设计
 
-#### 移动到 docs/ideas/
-- 所有 ai-*.md 文件（20个）
-- 创建 docs/ideas/README.md 索引
+### 每日整理任务（Cron）
+**时间**：每天09:00  
+**任务名**：🗂️ awesome-ai-ideas 项目整理
 
-#### 移动到 docs/pr/
-- 所有 PR-*.md 文件（10个）
-- 创建 docs/pr/README.md 索引
+#### 检查规则
+1. **根目录.md文件检查**
+   - 排除：README.md, LICENSE
+   - 匹配：`*_report.md`, `final_*.md`, `evolution*.md`, `*_progress.md`
+   - 动作：移动到 `docs/reports/`
 
-#### 移动到 docs/archive/
-- README_backup.md
-- 其他历史文档
+2. **根目录.sh文件检查**
+   - 匹配：`*_installer.sh` → `scripts/install/`
+   - 匹配：`config_*.sh` → `scripts/config/`
+   - 匹配：`docker_*.sh` → `scripts/docker/`
+   - 匹配：`env_*.sh`, `check_*.sh` → `scripts/utils/`
 
-### 自动化任务
+3. **OpenClaw配置文件检查**
+   - 匹配：AGENTS.md, BOOTSTRAP.md, HEARTBEAT.md等
+   - 动作：移动到 `.openclaw/` 目录
 
-#### 每日整理任务（Cron）
-- 时间：每天09:00
-- 检查：根目录新增的.md文件
-- 规则：
-  - ai-*.md → docs/ideas/
-  - PR-*.md → docs/pr/
-  - *backup*.md → docs/archive/
-- 操作：
-  - git mv移动文件
-  - 更新目录索引
-  - git commit提交
-  - git push推送
+#### 执行流程
+```bash
+# 1. 检查并创建目录
+mkdir -p docs/reports docs/guides
+mkdir -p scripts/install scripts/config scripts/docker scripts/utils
+mkdir -p .openclaw
 
-#### 每周深度整理（Cron）
-- 时间：每周日23:00
-- 检查：docs/ideas/和docs/pr/的README索引
-- 操作：
-  - 扫描目录下所有文件
-  - 按时间/类型排序
-  - 生成新的索引文档
-  - 提交更新
+# 2. 移动报告文件
+git mv *_report.md docs/reports/ 2>/dev/null
+git mv final_*.md docs/reports/ 2>/dev/null
+git mv evolution*.md docs/reports/ 2>/dev/null
+
+# 3. 移动脚本文件
+git mv *_installer.sh scripts/install/ 2>/dev/null
+git mv config_*.sh scripts/config/ 2>/dev/null
+git mv docker_*.sh scripts/docker/ 2>/dev/null
+git mv env_*.sh scripts/utils/ 2>/dev/null
+git mv check_*.sh scripts/utils/ 2>/dev/null
+
+# 4. 移动OpenClaw配置
+git mv AGENTS.md BOOTSTRAP.md HEARTBEAT.md .openclaw/ 2>/dev/null
+git mv IDENTITY.md MEMORY.md SOUL.md .openclaw/ 2>/dev/null
+git mv TOOLS.md TOOL_UPDATE.md USER.md .openclaw/ 2>/dev/null
+
+# 5. 更新.gitignore（如果需要）
+echo ".openclaw/" >> .gitignore
+
+# 6. 提交更改
+git add .
+git commit -m "chore: 自动整理项目结构
+
+- 移动报告文件到 docs/reports/
+- 移动脚本文件到 scripts/分类目录
+- 移动OpenClaw配置到 .openclaw/
+- 优化项目结构，提升可维护性"
+
+# 7. 推送更改
+git push origin main
+```
+
+### 每周深度整理（Cron）
+**时间**：每周日23:00  
+**任务名**：🗂️ awesome-ai-ideas 深度整理
+
+#### 检查内容
+1. **生成目录索引**
+   - 扫描 `docs/reports/` 生成README
+   - 扫描 `scripts/` 各子目录生成README
+
+2. **清理重复文件**
+   - 检查 `*.backup` 文件
+   - 检查重复的配置文件
+
+3. **更新主README**
+   - 更新项目结构说明
+   - 更新贡献指南
+
+---
 
 ## 实施步骤
 
-1. **手动整理（一次性）**
-   - 创建目标目录
-   - 移动现有文件
-   - 创建索引文档
-   - 提交PR
+### 第一步：手动整理（立即执行）
+1. 创建目标目录结构
+2. 移动现有文件
+3. 提交PR
 
-2. **设置Cron任务**
-   - 每日整理任务
-   - 每周深度整理
+### 第二步：创建Cron任务（今天）
+1. 创建每日整理任务（09:00）
+2. 创建每周深度整理任务（周日23:00）
 
-3. **更新文档**
-   - 在README.md中说明目录结构
-   - 创建CONTRIBUTING.md指导贡献者
+### 第三步：更新文档（今天）
+1. 更新README.md说明新结构
+2. 创建CONTRIBUTING.md
+3. 更新.gitignore
+
+---
 
 ## 预期效果
 
-- 根目录保持简洁（5个核心文件）
-- 文档分类清晰（ideas/、pr/、archive/）
-- 自动化维护（Cron任务）
-- 可持续发展（新文件自动归档）
+### 整理前
+- 根目录：67个文件（27 md + 40 sh）
+- 混乱度：高
+- 可维护性：差
+
+### 整理后
+- 根目录：5-10个核心文件
+- 结构：清晰分类
+- 可维护性：优秀
+- 自动化：每日维护
+
+---
+
+## 注意事项
+
+1. **保守移动**：只移动明确匹配的文件
+2. **保留README**：根目录README.md不移动
+3. **Git历史**：使用git mv保留历史
+4. **测试优先**：先在分支测试，再合并main
+5. **文档更新**：移动后更新相关引用
+
+---
+
+*方案创建时间：2026-04-04*
+*执行状态：待实施*
