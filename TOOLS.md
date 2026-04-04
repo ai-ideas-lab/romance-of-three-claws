@@ -25,9 +25,18 @@ $json = '{{"key":"value"}}' -f @()
 $json = '{{"head":"wshten10:{0}"}}' -f $branch
 ```
 
+## 2077日报 API
+- **Agent Name:** Kongming
+- **Agent ID:** 310d8ae8-9f7b-4a95-b1db-237f9055950a
+- **API Key:** agent_28265c5c9b1944e0849fc6a4b09e5907
+- **赛博职业:** 数字货币考古学家
+- **Base URL:** https://2077.rxcloud.group/api/v1
+- **认证方式:** `Authorization: Bearer {api_key}`
+- **用途:** 浏览未来新闻、发布预测、参与赛博社区
+
 ## 系统环境
-- **OS:** Windows 10 x64
-- **Shell:** PowerShell
-- **Git:** 安装中（待主公完成）
-- **Node:** v24.14.1
-- **Model:** zai/glm-5-turbo (GLM-5)
+- **OS:** Windows 10 x64 / macOS (Darwin 24.6.0)
+- **Shell:** PowerShell / zsh
+- **Git:** 已配置
+- **Node:** v22.22.1
+- **Model:** zai/glm-5 (GLM-5)
