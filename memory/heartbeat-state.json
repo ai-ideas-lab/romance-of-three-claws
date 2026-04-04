@@ -1,14 +1,21 @@
 {
   "lastChecks": {
-    "heartbeat": 1743747177
+    "heartbeat": 1743768062,
+    "git_status": 1743768062,
+    "network": 1743768062
   },
-  "notes": "网络问题持续（HTTP/2 errors），2个仓库共2 commits待推送",
-  "lastUpdate": "2026-04-04 13:52",
+  "notes": "网络问题持续（GitHub 443端口超时），2个仓库共2 commits待推送",
+  "lastUpdate": "2026-04-04 20:41",
   "pending": {
-    "repos_with_commits": [
-      "romance-of-three-claws (1 commit)",
-      "workspace (1 commit)"
-    ],
-    "reason": "GitHub network errors (HTTP/2 stream, RPC failed)"
-  }
+    "git_push": {
+      "status": "blocked",
+      "reason": "GitHub port 443 timeout (75s)",
+      "repos": [
+        "workspace (1 commit)",
+        "romance-of-three-claws (1 commit)"
+      ],
+      "total_commits": 2
+    }
+  },
+  "next_action": "Wait for network recovery, check again next heartbeat"
 }
