@@ -4,3 +4,4 @@ Docker.dmg
 *.iso
 ai-family-health-guardian/
 HEARTBEAT.md.bak
+node_modules/
