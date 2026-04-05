@@ -18,7 +18,9 @@
     "types": ["node", "jest"]
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "ai-workspace-orchestrator/frontend/src/**/*",
+    "ai-workspace-orchestrator/src/**/*"
   ],
   "exclude": [
     "node_modules",
