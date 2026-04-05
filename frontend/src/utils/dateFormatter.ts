@@ -4,7 +4,7 @@
  */
 
 // 从共享模块导入日期格式化函数
-import { formatDate, formatDateTime, getRelativeTime } from '../../shared/dateFormatter';
+import { formatDate, formatDateTime, getRelativeTime } from '../../../shared/dateFormatter';
 
 // 重新导出以保持向后兼容
 export { formatDate, formatDateTime, getRelativeTime };
