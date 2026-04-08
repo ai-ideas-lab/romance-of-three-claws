@@ -533,3 +533,148 @@ npm install axios@^1.14.0 sharp@^0.33.4 redis@^4.7.4 --save
 **报告生成时间**: 2026-04-08  
 **下次调研**: 2026-04-14  
 **调研状态**: ✅ 完成
+---
+
+# 深度技术调研 - 2026-04-09 06:00
+
+**调研人员**: 孔明  
+**本次调研项目**: ai-workspace-orchestrator、ai-rental-detective  
+**调研方法**: npm registry 查询最新版本 + 官方迁移文档核查
+
+## 1. ai-workspace-orchestrator
+
+**亮点**: 项目基础设施已是 12 个项目中最先进的 — Prisma 7、TypeScript 6、Vitest 4、Redis 5 均为当前最新。但三大 AI SDK 严重滞后，是最大短板。
+
+### 依赖版本对照
+
+| 依赖 | 当前 | 最新 | 差距 |
+|------|------|------|------|
+| openai | ^4.36.0 | **6.34.0** | 🔴 落后 2 个大版本 |
+| @anthropic-ai/sdk | ^0.22.0 | **0.86.1** | 🔴 落后 64 个 minor |
+| @google/generative-ai | ^0.21.0 | **0.24.1** | 🟡 落后 3 个 minor |
+| express | ^4.18.2 | **5.2.1** | 🔴 落后 1 个大版本 |
+| zod | ^3.22.2 | **4.3.6** | 🔴 落后 1 个大版本 |
+| prisma / @prisma/client | ^7.6.0 | **7.7.0** | ✅ 仅差 1 个 minor |
+| redis | ^5.11.0 | **5.11.0** | ✅ 最新 |
+| vitest | ^4.1.3 | **4.1.3** | ✅ 最新 |
+| typescript | ^6.0.2 | **6.0.2** | ✅ 最新 |
+
+### 可执行升级路径
+
+**第一阶段 — AI SDK 升级（最高优先级，影响 AI 功能质量）**:
+
+```bash
+# OpenAI 4→6: API 变化较大，但向后兼容层存在
+# 关键变化: Structured Output 原生支持、zod peerDep (需 zod ≥3.25 或 4.x)
+npm install openai@^6.34.0
+
+# Anthropic 0.22→0.86: 新增 tool_use、JSON mode、vision 支持
+npm install @anthropic-ai/sdk@^0.86.1
+
+# Google Generative AI 0.21→0.24: 新增多模态和安全控制
+npm install @google/generative-ai@^0.24.1
+```
+
+⚠️ **注意**: openai@6.x 的 peerDependency 要求 `zod@^3.25 || ^4.0`，当前 `zod@^3.22.2` 不满足。必须先升级 zod。
+
+**第二阶段 — Zod 3→4（解锁 AI SDK 兼容）**:
+- Zod 4 breaking changes: `message` 参数 → `error` 参数；`.format()` → `z.treeifyError()`；`invalid_type_error/required_error` 被移除
+- 有社区 codemod: `npx zod-v3-to-v4`
+- 升级命令: `npm install zod@^4.3.6`
+
+**第三阶段 — Express 4→5（中期计划）**:
+- Express 5 已正式发布 (5.2.1)，官方提供 codemod: `npx codemod@latest @expressjs/v5-migration-recipe`
+- 关键 breaking change: `req.param(name)` 移除 → 用 `req.params/body/query`；Promise rejection 自动处理；`res.send(status)` 移除 → `res.sendStatus()`
+- 升级命令: `npm install express@^5.2.1`
+
+**第四阶段 — Prisma 7.6→7.7（低风险）**:
+- 7.7.0 新增 `prisma bootstrap` 命令（一键脚手架）、bug 修复
+- `npm install prisma@^7.7.0 @prisma/client@^7.7.0 && npx prisma generate`
+
+### 架构优化建议
+
+- **多模型路由器**: 项目已有 OpenAI/Anthropic/Google 三家 SDK，建议抽象一个统一 `LLMRouter` 层，根据任务类型（代码生成→Claude、通用对话→GPT、多模态→Gemini）自动选择模型，预计降低 30% API 成本
+- **Zod Schema 复用**: 升级到 Zod 4 后，可直接将 zod schema 传给 openai 的 `client.chat.completions.parse()` 实现结构化输出，省去手动 JSON 解析
+- **Prisma 7.7 MCP 支持**: Prisma 7.7 开始支持 MCP（Model Context Protocol），可考虑将数据库 schema 暴露给 AI 助手用于自然语言查询
+
+---
+
+## 2. ai-rental-detective
+
+**亮点**: 前端已先行升级（MUI v7、react-router-dom v7、multer v2），是项目中前端最激进的。但后端严重老化 — Prisma 5.4、ESLint 8 + typescript-eslint 5、OpenAI 4 均落后 1-2 年。
+
+### 依赖版本对照
+
+| 依赖 | 当前 | 最新 | 差距 |
+|------|------|------|------|
+| prisma / @prisma/client | ^5.4.2 | **7.7.0** | 🔴 落后 2 个大版本 |
+| openai | ^4.26.0 | **6.34.0** | 🔴 落后 2 个大版本 |
+| @mui/material | ^7.3.9 | **9.0.0** | 🔴 落后 1 个大版本 |
+| @mui/x-data-grid | ^8.28.1 | 需确认 | 🟡 可能需跟随 MUI 升级 |
+| @typescript-eslint/* | ^5.59.9 | **^8.58.0** | 🔴 落后 3 个大版本 |
+| express | ^4.18.2 | **5.2.1** | 🔴 落后 1 个大版本 |
+| react-router-dom | ^7.13.2 | **7.14.0** | ✅ 接近最新 |
+| multer | ^2.1.1 | **2.1.1** | ✅ 最新 |
+| axios | ^1.14.0 | **1.14.0** | ✅ 最新 |
+
+### 可执行升级路径
+
+**第一阶段 — TypeScript 工具链升级（低风险，高收益）**:
+```bash
+# typescript-eslint 5→8 是必须的，5 已停止维护
+npm install @typescript-eslint/eslint-plugin@^8.58.0 @typescript-eslint/parser@^8.58.0 --save-dev
+```
+注意: ESLint 8 配置格式在 ESLint 9 改为 flat config，但 8.x 仍可用，先不急着升 9。
+
+**第二阶段 — Prisma 5→7（高风险，建议独立分支）**:
+- Prisma 5→6: 主要是 `@prisma/client` 导入路径变化、`previewFeatures` 移除
+- Prisma 6→7: 查询引擎重写，性能大幅提升；需要 `npx prisma migrate dev` 重新生成 migration
+- 步骤:
+  ```bash
+  git checkout -b upgrade/prisma-7
+  npm install prisma@^7.7.0 @prisma/client@^7.7.0
+  npx prisma migrate dev  # 验证所有 migration 兼容
+  npm test                # 全量回归
+  ```
+
+**第三阶段 — MUI 7→9（前端大升级）**:
+- MUI v9 (Material UI 9) 已发布，这是一次重大更新
+- 需要同步升级 `@mui/icons-material`、`@emotion/react`、`@emotion/styled`、`@mui/x-data-grid`
+- 建议阅读 MUI v8→v9 迁移指南后执行
+- `npm install @mui/material@^9.0.0 @mui/icons-material@^9.0.0`
+
+**第四阶段 — OpenAI 4→6**（同 orchestrator 方案）
+
+### 架构优化建议
+
+- **数据模型审查**: Prisma 从 5.4 直接跳到 7.7，建议趁升级机会审查 schema 设计，利用 Prisma 7 的 `@unique` 复合索引优化租金查询性能
+- **前端状态管理**: react-router-dom v7 已支持 data loading (loader pattern)，可考虑将部分数据获取从 useEffect 迁移到 route loader，减少瀑布式请求
+- **ESLint Flat Config**: 升级到 typescript-eslint 8 后，考虑同时迁移到 ESLint flat config (`eslint.config.mjs`)，为后续 ESLint 9 做准备
+
+---
+
+## 3. 全局观察
+
+### 12 个项目的共性技术债
+
+| 技术 | 受影响项目数 | 严重程度 |
+|------|-------------|---------|
+| Express 4.x (未升级到 5) | **10/12** | 🔴 高 |
+| OpenAI SDK 4.x (未升级到 6) | **12/12** | 🔴 高 |
+| Prisma 5.x (未升级到 7) | **10/12** | 🔴 高 |
+| moment.js (应替换) | **2/12** | 🟡 中 |
+| typescript-eslint 5.x (已停止维护) | **3/12** | 🟡 中 |
+| MUI v5/v7 (未升级到 v9) | **3/12** | 🟡 中 |
+
+### 建议的全局升级策略
+
+1. **创建共享升级模板**: 在 `docs/` 下维护一个 `upgrade-checklist.md`，包含每个大版本升级的标准步骤和验证清单
+2. **优先升级 OpenAI SDK**: 所有 12 个项目都使用 openai@4.x，统一升级到 6.x 收益最大（结构化输出 + 性能）
+3. **逐步推进 Express 5**: 使用官方 codemod 批量处理，先在非关键项目上验证
+
+---
+
+**报告生成时间**: 2026-04-09 06:01 CST  
+**数据来源**: npm registry (实时查询) + GitHub Releases + 官方迁移文档  
+**下次调研**: 2026-04-09 12:00  
+**调研状态**: ✅ 完成
