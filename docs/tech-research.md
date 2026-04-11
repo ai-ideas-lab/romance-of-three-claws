@@ -312,3 +312,156 @@ npm install @mui/material@^9.0.0 @mui/icons-material@^9.0.0
 **数据来源**: npm registry (实时查询) + GitHub Releases + 官方迁移文档  
 **下次调研**: 2026-04-09 12:00  
 **调研状态**: ✅ 完成
+
+---
+
+# 深度技术调研 - 2026-04-12 06:00
+
+**调研人员**: 孔明  
+**本次调研项目**: ai-carbon-footprint-tracker、ai-workspace-orchestrator  
+**调研方法**: npm registry 实时查询 + 项目源码结构分析 + Express/Prisma/Zod 官方迁移文档核查
+
+## 1. ai-carbon-footprint-tracker
+
+**项目定位**: AI 驱动的个人碳足迹追踪与管理平台。Express + Prisma + OpenAI 架构，TypeScript 全栈。
+
+### 依赖版本对照
+
+| 依赖 | 当前 | 最新 | 差距 |
+|------|------|------|------|
+| express | ^4.18.2 | **5.2.1** | 🔴 落后 1 个大版本 |
+| @prisma/client | ^5.6.0 | **7.7.0** | 🔴 落后 2 个大版本 |
+| openai | ^4.20.1 | **6.34.0** | 🔴 落后 2 个大版本 |
+| typescript | ^5.3.3 | **6.0.2** | 🔴 落后 1 个大版本 |
+| winston | ^3.11.0 | **3.19.0** | 🟡 落后 8 个 minor |
+| helmet | ^7.1.0 | **8.1.0** | 🔴 落后 1 个大版本 |
+| moment | ^2.29.4 | 2.30.1 | 🟡 已弃用（官方推荐迁移） |
+| joi | ^17.11.0 | 17.13.x | ✅ 当前大版本最新 |
+| lodash | 4.18.1 | 4.18.1 | ✅ 最新 |
+| jest | ^29.7.0 | **30.3.0** | 🔴 落后 1 个大版本 |
+| eslint | ^8.55.0 | **10.2.0** | 🔴 落后 2 个大版本 |
+
+### 可执行升级路径
+
+**第一阶段 — 低风险 minor 升级**（预计 30 分钟）
+```
+npm i winston@^3.19.0 moment@^2.30.1
+```
+运行 `npm test` 验证，几乎零破坏性。
+
+**第二阶段 — Express 4→5**（预计 2 小时）
+Express 5 的关键破坏性变更：
+- `app.del()` 移除 → 统一使用 `app.delete()`
+- `app.param(fn)` 签名变更
+- `res.redirect()` 不再支持双参数形式（status + url 需改为链式 `.status(302).redirect()`）
+- 路径参数正则从 `app.get('/user/:id(\\d+)')` 改为命名路由
+- `res.json(obj, status)` 移除 → 改用 `res.status(code).json(obj)`
+- `req.host` 返回含 port 的完整 host（旧版不含 port）
+- **行动**: 全局搜索 `res.redirect(`、`res.json(`、`app.param(` 确认影响范围，逐一修改后升级。
+
+**第三阶段 — Prisma 5→7**（预计 3 小时）
+Prisma 6→7 的重大变更：
+- `prisma db push` 行为调整，新增 `--force-reset` 参数
+- `@unique` 约束在复合索引上的行为变更
+- `include`/`select` 类型推断改进（可能影响 TypeScript 编译）
+- **行动**: `npx prisma migrate dev` 创建迁移 → 修复类型错误 → 验证所有 CRUD 操作。
+
+**第四阶段 — 替换 moment → dayjs**（预计 1 小时）
+moment.js 已于 2020 年进入维护模式，官方推荐 dayjs（仅 2KB，API 高度兼容）：
+```
+npm uninstall moment && npm i dayjs
+```
+替换 `moment()` → `dayjs()`，`.format()` 语法一致，仅需调整插件导入（如 timezone）。
+
+**第五阶段 — ESLint 8→10 + Jest 29→30**（预计 2 小时）
+ESLint 10 要求 flat config（`eslint.config.js`），需重写配置文件。Jest 30 是 minor breaking（主要是 `ts-jest` 兼容性）。
+
+### 架构优化建议
+
+- **移除 lodash 依赖**: 项目仅用 lodash 基础方法（如 `debounce`、`cloneDeep`），可用原生 `structuredClone()` + `setTimeout` 替代，减少 ~70KB bundle 大小
+- **Joi → Zod**: 项目同时存在 Joi（运行时校验）和 TypeScript 类型，迁移到 Zod 可统一类型定义和校验逻辑，消除双维护负担
+- **添加请求限流**: 当前缺少 `express-rate-limit`，碳足迹 API 可能被滥用，建议加入
+
+---
+
+## 2. ai-workspace-orchestrator（二次调研 - 跟踪上次建议进展）
+
+**项目定位**: 企业级 AI 工作流自动化平台。Express + Prisma 7 + 多 AI 引擎 + Redis 缓存 + React 前端。
+
+### 依赖版本对照（当前 vs 最新）
+
+| 依赖 | 当前 | 最新 | 变化 |
+|------|------|------|------|
+| @prisma/client | ^7.6.0 | **7.7.0** | ✅ 几乎最新 |
+| express | ^4.18.2 | **5.2.1** | 🔴 落后 1 个大版本（同上次） |
+| @anthropic-ai/sdk | ^0.22.0 | **0.88.0** | 🔴 落后 66 个 minor |
+| @google/generative-ai | ^0.21.0 | — | 🟡 未查询（Google 更新频繁） |
+| openai | ^4.36.0 | **6.34.0** | 🔴 落后 2 个大版本 |
+| zod | ^3.22.2 | **4.3.6** | 🔴 落后 1 个大版本 |
+| vitest | ^4.1.3 | **4.1.4** | ✅ 几乎最新 |
+| typescript | ^6.0.2 | 6.0.2 | ✅ 最新 |
+| redis | ^5.11.0 | 5.11.0 | ✅ 最新 |
+| eslint | ^8.45.0 | **10.2.0** | 🔴 落后 2 个大版本 |
+
+### 关键发现：AI SDK 严重过时
+
+**@anthropic-ai/sdk 0.22 → 0.88**（66 个版本差距）
+这是本次调研最紧急的问题。0.22 版本缺少：
+- Claude 3.5/4 系列模型支持
+- Tool use (function calling) 的改进 API
+- Streaming 的 `text_stream` 便利方法
+- Messages Batch API
+- **行动**: 直接升级到 `^0.88.0`，检查 `messages.create()` 调用签名是否变更（模型名称字符串如 `claude-3-opus-20240229` 可能需要更新）
+
+**OpenAI 4.36 → 6.34**（2 个大版本）
+- 5.x: 引入 Realtime API、Structured Outputs、更完善的 streaming
+- 6.x: 全面 ESM 支持、Assistant API v2、新增 Responses API
+- **行动**: 注意 6.x 改为 ESM-first，但项目已设 `"type": "module"` 所以兼容。重点检查 `chat.completions.create()` 返回类型变化
+
+**Zod 3 → 4**（重大升级）
+Zod 4 主要变更：
+- `z.object()` 默认 strip unknown keys（行为不变）
+- `z.infer<>` 推断性能大幅优化
+- 新增 `z.interface()` 用于大 schema 的懒推断
+- `refine`/`transform` 链式语法改进
+- **行动**: 基本向后兼容，但需注意 `z.custom()` 和 `z.preprocess()` 的签名微调
+
+### 可执行升级路径
+
+**第一阶段 — AI SDK 升级**（优先级最高，预计 3 小时）
+```bash
+npm i @anthropic-ai/sdk@^0.88.0 openai@^6.34.0 @google/generative-ai@latest
+```
+逐一检查每个 AI 引擎的调用代码，运行集成测试。
+
+**第二阶段 — Zod 3→4**（预计 2 小时）
+```bash
+npm i zod@^4.3.6
+```
+全局搜索 `z.preprocess` 和 `z.custom` 确认兼容性，其余 API 基本向后兼容。
+
+**第三阶段 — Express 4→5**（同 carbon-tracker 方案）
+
+### 架构优化建议
+
+- **双测试框架统一**: 项目同时使用 Jest（`jest.config.cjs`）和 Vitest（`vitest@4.1.3`），建议统一到 Vitest——Vitest 原生支持 ESM 和 TypeScript，配置更简洁，且项目已是 `"type": "module"`
+- **ESLint 8→10 + Flat Config**: 配合 Vitest 统一，顺势迁移到 ESLint flat config，减少配置复杂度
+- **缓存层优化**: Redis 5.11 已是最新，但建议检查 `cache-manager` 是否用了 Redis store，考虑直接用 `redis` 包替代 `cache-manager`（减少一层抽象）
+- **错误处理中间件**: 检查是否实现了 Express 5 兼容的异步错误处理（Express 5 原生支持 async middleware 的 rejection 捕获，无需 `express-async-errors`）
+
+---
+
+## 全局趋势观察
+
+1. **Express 5 迁移是跨项目共同课题**: 所有 ai-ideas 项目均停留在 Express 4，建议制定统一的迁移模板
+2. **Prisma 5→7 跨两版本**: carbon-tracker 还在 Prisma 5，orchestrator 已在 7，说明项目间技术栈存在代差
+3. **moment.js 全面淘汰期**: 使用 moment 的项目应统一迁移到 dayjs
+4. **AI SDK 更新频率极高**: OpenAI 和 Anthropic SDK 每月多版本迭代，建议建立定期更新机制（如每月一次 `npm outdated` 审查）
+5. **ESLint 10 + Flat Config**: 所有项目均需迁移，建议统一配置模板
+
+---
+
+**报告生成时间**: 2026-04-12 06:01 CST  
+**数据来源**: npm registry (实时查询) + 项目源码分析  
+**下次调研**: 2026-04-12 12:00  
+**调研状态**: ✅ 完成
