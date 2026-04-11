@@ -1,538 +1,200 @@
-# AI Ideas Lab 技术调研报告 - 新增项目分析
+# AI Ideas Lab 技术调研报告
 
-**调研日期**: 2026-04-08  
-**调研人员**: 孔明 (深度技术调研)  
-**调研范围**: ai-email-manager 和 ai-workspace-orchestrator 技术栈分析和优化建议
+---
 
-## 新增项目分析 (2026-04-08)
+# 深度技术调研 - 2026-04-11 18:00
 
-### 📊 ai-email-manager 技术栈分析（本次重点调研）
+**调研人员**: 孔明  
+**本次调研项目**: ai-family-health-guardian、ai-workspace-orchestrator  
+**调研方法**: npm registry 实时查询 + Express/Prisma 官方迁移文档核查
 
-**当前依赖版本状态**:
-- @prisma/client: ^5.7.1 → **重大升级: ^7.7.0** (主要版本跳跃)
-- express: ^4.18.2 → **建议升级到 ^5.2.1** (主要版本跳跃)
-- openai: ^4.26.0 → **建议升级到 ^6.33.0** (重大版本更新)
-- nodemailer: ^6.9.7 → **建议升级到 ^8.0.5** (安全性能优化)
-- moment: ^2.29.4 → **建议替换为 date-fns 或 dayjs** (Moment.js已弃用)
-- vite: ^5.0.10 → **建议升级到 ^8.0.7** (构建性能优化)
-- react: ^18.2.0 → **建议升级到 ^19.2.4** (React 19新特性)
-- mailparser: ^0.9.15 → **建议升级到 ^3.9.6** (重大版本更新)
+## 1. ai-family-health-guardian
 
-**依赖升级建议**:
-1. **Prisma 5.7.1 → 7.7.0**: 数据库查询性能提升40%、更好的类型安全、新增模糊搜索功能
-2. **Express 4.18.2 → 5.2.1**: 完全重写的中间件系统、内置路由优化、更好的错误处理
-3. **OpenAI 4.26.0 → 6.33.0**: 结构化输出、改进的流式响应、智能重试机制
-4. **Nodemailer 6.9.7 → 8.0.5**: OAuth2支持改进、更好的SSL/TLS处理
-5. **Mailparser 0.9.15 → 3.9.6**: 重写解析引擎，支持更多邮件格式、性能提升50%
-6. **Vite 5.0.10 → 8.0.7**: 构建速度提升30%、改进的热更新、更好的插件支持
-7. **React 18.2.0 → 19.2.4**: 并发特性改进、更好的Suspense支持
-8. **Moment.js替换**: 迁移到date-fns，减少包体积80%，提升性能
+**项目定位**: AI 驱动的家庭健康监测系统，独居老人实时健康监护。使用 MQTT 协议接收 IoT 设备数据，Socket.IO 推送实时告警。
 
-**架构优化方向**:
-- 利用Prisma 7的模糊搜索优化邮件分类算法
-- 实现邮件处理的批量处理流水线，提升吞吐量
-- 添加AI API调用智能缓存，降低运营成本
-- 引入WebSocket实现邮件状态实时推送
-- 实现邮件附件的智能预览和处理
+### 依赖版本对照
 
-**性能提升机会**:
-- 邮件解析批量处理，性能提升60%
-- 智能缓存机制减少重复AI调用30%
-- 前端组件懒加载，初始加载时间减少40%
-- 实现邮件数据的增量同步，减少带宽占用
-- 数据库查询优化，响应时间提升35%
+| 依赖 | 当前 | 最新 | 差距 |
+|------|------|------|------|
+| @prisma/client | ^5.6.0 | **7.7.0** | 🔴 落后 2 个大版本 |
+| prisma | ^5.6.0 | **7.7.0** | 🔴 同上 |
+| express | ^4.18.2 | **5.2.1** | 🔴 落后 1 个大版本 |
+| openai | ^4.26.0 | **6.34.0** | 🔴 落后 2 个大版本 |
+| mqtt | ^5.3.4 | **5.15.1** | 🟡 落后 12 个 minor |
+| socket.io | ^4.7.4 | **4.8.3** | 🟡 落后 1 个 minor |
+| winston | ^3.11.0 | **3.19.0** | 🟡 落后 8 个 minor |
+| joi | ^17.11.0 | **18.1.2** | 🔴 落后 1 个大版本 |
+| jsonwebtoken | ^9.0.2 | 9.0.2 | ✅ 最新（9.x 稳定版） |
+| typescript | ^5.2.2 | **6.0.2** | 🔴 落后 1 个大版本 |
 
-### 📊 ai-workspace-orchestrator 技术栈分析（本次新增）
+### 可执行升级路径
 
-**当前依赖版本状态**:
-- @prisma/client: ^5.1.1 → **重大升级: ^7.7.0** (主要版本跳跃)
-- express: ^4.18.2 → **建议升级到 ^5.2.1** (主要版本跳跃)
-- openai: ^4.26.0 → **建议升级到 ^6.33.0** (重大版本更新)
-- @anthropic-ai/sdk: ^0.4.3 → **建议升级到 ^0.85.0** (重大版本更新)
-- @google/generative-ai: ^0.1.3 → **建议升级到 ^0.24.1** (重要更新)
-- winston: ^3.10.0 → **建议升级到 ^3.13.0** (性能改进)
+**第一阶段 — Prisma 5→7（最高优先级，数据层基础）**:
 
-**依赖升级建议**:
-1. **Prisma 5.1.1 → 7.7.0**: 查询性能优化、改进的TypeScript支持、新增性能分析
-2. **Express 4.18.2 → 5.2.1**: 新的中间件架构、内置路由系统、更好的错误处理
-3. **OpenAI 4.26.0 → 6.33.0**: 结构化输出、智能重试、更好的流式响应
-4. **Anthropic AI 0.4.3 → 0.85.0**: 新增工具调用、改进的错误处理、更好的提示工程支持
-5. **Google Gemini 0.1.3 → 0.24.1**: 增强的多模态支持、改进的安全控制
-6. **Winston 3.10.0 → 3.13.0**: 更好的日志格式化、性能监控增强
+Prisma 7 breaking changes 较大，需要注意：
+- 查询引擎从 Node-API 重写为纯 WASM，性能提升但需更新 `prisma-client-js` provider → `prisma-client`
+- `output` 字段在 generator block 中变为必填，import 路径从 `@prisma/client` → `./generated/prisma/client`
+- 要求 Node ≥20.19、TypeScript ≥5.4
 
-**架构优化方向**:
-- 升级AI SDK支持，实现多模型混合智能处理
-- 利用Express 5的新特性优化API网关性能
-- 实现工作流引擎的插件化架构
-- 引入事件驱动架构提升系统可扩展性
-- 实现智能负载均衡和资源调度
-
-**性能提升机会**:
-- AI模型智能选择，降低30%计算成本
-- 异步任务队列优化，提升并发处理能力50%
-- WebSocket实时通信，延迟减少60%
-- 数据库连接池优化，提升查询效率40%
-- 实现智能缓存，减少重复计算
-
-### 📊 ai-carbon-footprint-tracker 技术栈分析
-
-### 📊 ai-carbon-footprint-tracker 技术栈分析
-
-**当前依赖版本状态**:
-- @prisma/client: ^5.6.0 → **重大升级: ^7.7.0** (主要版本跳跃)
-- express: ^4.18.2 → **建议升级到 ^5.2.1** (主要版本跳跃)
-- openai: ^4.20.1 → **建议升级到 ^6.33.0** (重大版本更新)
-- axios: ^1.6.0 → **建议升级到 ^1.14.0** (性能优化和安全修复)
-- moment: ^2.29.4 → **建议替换为 date-fns 或 dayjs** (Moment.js已弃用)
-- lodash: "4.18.1" → **保持当前版本** (最新稳定版)
-- bcryptjs: ^2.4.3 → **建议升级到 ^5.1.1** (安全性能优化)
-- winston: ^3.11.0 → **建议升级到 ^3.13.0** (性能改进)
-
-**依赖升级建议**:
-1. **Prisma 5.6.0 → 7.7.0**: 包含查询性能优化、改进的TypeScript支持、新功能如模糊搜索和性能分析
-2. **Express 4.18.2 → 5.2.1**: 完全重写的中间件系统、内置路由系统改进、更好的错误处理
-3. **OpenAI 4.20.1 → 6.33.0**: 新增结构化输出、改进的流式响应、增强的错误处理和重试机制
-4. **Axios 1.6.0 → 1.14.0**: 更好的TypeScript支持、改进的错误处理、性能优化
-5. **Moment.js替换**: 建议迁移到date-fns或dayjs，大幅减少包体积并改善性能
-6. **bcryptjs 2.4.3 → 5.1.1**: 安全性能优化，更好的错误处理和稳定性
-7. **Winston 3.11.0 → 3.13.0**: 更好的日志格式化和性能监控
-
-**架构优化方向**:
-- 利用Prisma 7的模糊搜索功能优化碳排放数据查询性能
-- 替换Moment.js为现代化的日期库，提升前端渲染性能
-- 实现AI API调用的智能缓存机制，减少成本并提升响应速度
-- 添加碳排放数据的实时计算和预测功能
-- 引入WebSocket实现碳排放数据的实时推送更新
-
-**性能提升机会**:
-- 实现数据查询缓存，减少重复计算数据库查询
-- 优化AI API调用策略，实现批量处理和智能重试
-- 前端组件懒加载，减少初始加载时间
-- 实现数据可视化组件的按需加载
-- 添加服务端缓存层，减少数据库访问频率
-
-### 📊 ai-email-manager 技术栈分析
-
-**当前依赖版本状态**:
-- @prisma/client: ^5.7.1 → **重大升级: ^7.7.0** (主要版本跳跃)
-- express: ^4.18.2 → **建议升级到 ^5.2.1** (主要版本跳跃)
-- openai: ^4.26.0 → **建议升级到 ^6.33.0** (重大版本更新)
-- nodemailer: ^6.9.7 → **建议升级到 ^8.0.5** (安全性能优化)
-- mailparser: ^0.9.15 → **建议升级到 ^3.9.6** (重大版本更新)
-- vite: ^5.0.10 → **建议升级到 ^8.0.7** (构建性能优化)
-- typescript: ^5.3.3 → **建议升级到 ^6.0.2** (TypeScript 6新特性)
-- react: ^18.2.0 → **建议升级到 ^19.2.4** (React 19新特性)
-
-**依赖升级建议**:
-1. **Prisma 5.7.1 → 7.7.0**: 数据库查询性能提升、更好的类型安全、新增模糊搜索功能
-2. **Express 4.18.2 → 5.2.1**: 完全重写的中间件系统、更好的错误处理、内置路由优化
-3. **OpenAI 4.26.0 → 6.33.0**: 结构化输出、改进的流式响应、更好的错误处理和重试机制
-4. **Nodemailer 6.9.7 → 8.0.5**: OAuth2支持改进、更好的错误处理、安全性提升
-5. **Mailparser 0.9.15 → 3.9.6**: 重大版本更新，更好的HTML解析、性能改进、新特性支持
-6. **Vite 5.0.10 → 8.0.7**: 更快的构建速度、改进的热更新、更好的插件支持
-7. **TypeScript 5.3.3 → 6.0.2**: 支持新的ESM特性、更好的类型推断、性能改进
-8. **React 18.2.0 → 19.2.4**: 并发特性、Suspense改进、更好的Server Components支持
-
-**架构优化方向**:
-- 利用Mailparser 3的新特性优化邮件解析性能，支持更多邮件格式
-- 实现邮件分类的智能算法，减少人工干预
-- 添加邮件处理的批量处理机制，提升处理效率
-- 实现邮件分析结果的实时推送和通知
-- 引入智能预加载机制，优化用户体验
-
-**性能提升机会**:
-- 实现邮件解析的批量处理，大幅提升处理速度
-- 添加邮件缓存层，避免重复解析相同邮件
-- 优化前端构建流程，利用Vite 8的改进提升开发体验
-- 实现组件懒加载，减少初始包大小
-- 添加WebSocket支持，实现邮件处理的实时状态更新
-
-## 🔧 关键技术风险评估
-
-### 高风险依赖升级（需要全面测试）
-1. **Express 4.x → 5.x**: 主要版本跳跃，中间件API可能有重大变更
-2. **Prisma 5.x → 7.x**: 数据库工具重大版本，需要验证所有查询和迁移
-3. **Mailparser 0.x → 3.x**: 邮件解析引擎重写，需要测试各种邮件格式兼容性
-
-### 中等风险依赖升级
-1. **OpenAI 4.x → 6.x**: API接口可能有调整，需要测试AI功能
-2. **TypeScript 5.x → 6.x**: 主要版本更新，但相对稳定
-3. **React 18 → 19**: 前端框架升级，需要测试组件兼容性
-
-### 低风险依赖升级
-1. **Vite 5 → 8**: 构建工具升级，风险较低
-2. **Axios 1.6 → 1.14**: 次要版本更新，相对安全
-3. **Nodemailer 6.9 → 8.0**: 邮件发送工具升级，风险可控
-
-## 📈 升级实施计划
-
-### 第一阶段：基础设施升级（1-2周）
 ```bash
-# 1. 升级构建工具和TypeScript
-npm install typescript@^6.0.2 vite@^8.0.7 --save-dev
-
-# 2. 升级前端框架
-npm install react@^19.2.4 @types/react@^19.2.4 --save
-
-# 3. 升级UI组件库（如使用）
-npm install @mui/material@^7.3.9 @emotion/react@^11.11.1 --save
-```
-
-### 第二阶段：核心依赖升级（2-3周）
-```bash
-# 1. 升级Express（高风险）
-npm install express@^5.2.1 @types/express@^5.2.1 --save
-
-# 2. 升级Prisma数据库工具
-npm install prisma@^7.7.0 @prisma/client@^7.7.0 --save
+# 步骤
+npm install prisma@^7.7.0 @prisma/client@^7.7.0
+# 修改 schema.prisma: generator client { provider = "prisma-client" output = "../generated/prisma" }
 npx prisma generate
-
-# 3. 升级OpenAI
-npm install openai@^6.33.0 --save
+# 更新所有 import 路径: from "@prisma/client" → from "../generated/prisma/client"
+npx prisma migrate dev  # 验证迁移兼容性
+npm test
 ```
 
-### 第三阶段：工具库升级（1-2周）
+**第二阶段 — OpenAI 4→6 + Joi→Zod（联动升级）**:
+
+OpenAI 6.x 的 `client.chat.completions.parse()` 原生支持 Zod schema 做结构化输出。项目当前用 Joi 做验证，建议借升级契机迁移到 Zod，一石二鸟。
+
 ```bash
-# 1. 升级邮件处理相关依赖
-npm install nodemailer@^8.0.5 mailparser@^3.9.6 --save
-
-# 2. 替换Moment.js
-npm uninstall moment
-npm install date-fns --save
-
-# 3. 升级其他依赖
-npm install axios@^1.14.0 bcryptjs@^5.1.1 winston@^3.13.0 --save
+# 替换验证库
+npm uninstall joi
+npm install zod@^4.3.6
+# 升级 OpenAI
+npm install openai@^6.34.0
 ```
 
-### 第四阶段：测试和优化（1-2周）
-- 全面测试所有功能
-- 性能优化和安全测试
-- 文档更新和团队培训
+Joi → Zod 迁移要点：
+- `Joi.string().email()` → `z.string().email()`
+- `Joi.object({})` → `z.object({})`
+- `schema.validate(value)` → `schema.parse(value)` (抛异常) 或 `schema.safeParse(value)` (返回 result)
+- Zod 4 breaking: `message` 参数改为 `error`；移除 `invalid_type_error`/`required_error`
 
-## 🎯 关键改进建议
+**第三阶段 — Express 4→5（中期计划）**:
 
-### ai-carbon-footprint-tracker 优化重点
-1. **数据处理优化**: 利用Prisma 7的新查询功能优化碳排放数据检索
-2. **AI成本控制**: 实现智能缓存机制，减少重复的AI API调用
-3. **用户体验**: 替换过期的日期库，提升前端性能
-4. **安全性**: 升级bcryptjs到最新版本，提升数据安全性
-
-### ai-email-manager 优化重点
-1. **邮件处理效率**: 利用Mailparser 3的新特性优化解析性能
-2. **架构现代化**: 升级到Express 5，利用新的中间件系统
-3. **开发体验**: 升级到Vite 8和React 19，提升开发效率
-4. **扩展性**: 实现批量处理和缓存机制，提升系统扩展性
-
-### 通用优化建议
-1. **监控和日志**: 升级Winston到最新版本，增强日志和监控能力
-2. **错误处理**: 利用Express 5和OpenAI 6的改进错误处理机制
-3. **性能监控**: 实现应用性能监控，及时发现性能瓶颈
-4. **代码质量**: 升级TypeScript 6，利用新的类型检查功能
-
-## 💰 升级ROI分析
-
-### 投入成本预估
-- **开发时间**: 4-6周（包括测试和修复）
-- **测试资源**: 完整的QA环境和自动化测试
-- **培训成本**: 团队新技术栈培训，1-2周
-- **总投入**: 约6-8周开发时间
-
-### 预期收益
-- **性能提升**: API响应时间减少20-40%，数据处理速度提升30-50%
-- **成本节约**: AI API调用成本减少20-30%（通过智能缓存）
-- **开发效率**: 新功能开发速度提升25-40%
-- **维护成本**: 减少bug修复工作量，降低30-40%
-- **用户体验**: 前端性能提升，用户满意度提高
-
-### 风险控制
-- **渐进式升级**: 分阶段升级，每个阶段都有测试验证
-- **回滚机制**: 准备完整的回滚方案
-- **灰度发布**: 先在测试环境验证，再逐步推广到生产环境
-- **监控预警**: 实时监控系统状态，及时发现和解决问题
-
----
-
-**报告生成时间**: 2026-04-08  
-**下次调研**: 2026-04-14  
-**调研状态**: ✅ 完成
-
----
-
-## 🔧 关键技术风险评估
-
-### 高风险依赖升级（需要全面测试）
-1. **Express 4.x → 5.x**: 主要版本跳跃，中间件API可能有重大变更
-2. **Prisma 5.x → 7.x**: 数据库工具重大版本，需要验证所有查询和迁移
-3. **@anthropic-ai/sdk 0.4.x → 0.85.x**: AI SDK重大更新，需要重写提示词
-
-### 中等风险依赖升级
-1. **OpenAI 4.x → 6.x**: API接口可能有调整，需要测试AI功能
-2. **@google/generative-ai 0.1.x → 0.24.x**: 谷歌AI模型API可能有变化
-3. **React 18 → 19**: 前端框架升级，需要测试组件兼容性
-
-### 低风险依赖升级
-1. **Vite 5 → 8**: 构建工具升级，风险较低
-2. **Winston 3.10 → 3.13**: 日志库更新，相对安全
-3. **Nodemailer 6.9 → 8.0**: 邮件工具升级，风险可控
-
-## 📈 升级实施计划
-
-### 第一阶段：基础设施升级（1周）
+Express 5 已稳定 (5.2.1)，官方提供自动 codemod：
 ```bash
-# 1. 升级构建工具
-npm install typescript@^6.0.2 vite@^8.0.7 --save-dev
-
-# 2. 升级前端框架（如果使用）
-npm install react@^19.2.4 @types/react@^19.2.4 --save
+npx codemod@latest @expressjs/v5-migration-recipe
+npm install express@^5.2.1
 ```
 
-### 第二阶段：核心AI工具升级（2周）
-```bash
-# 1. 升级AI相关依赖
-npm install openai@^6.33.0 @anthropic-ai/sdk@^0.85.0 @google/generative-ai@^0.24.1 --save
+关键 breaking changes：
+- `res.send(status)` → `res.sendStatus(status)`（纯数字参数行为变了）
+- `res.json(obj, status)` → `res.status(status).json(obj)`
+- Promise rejection 自动传递到 error handler（不再需要 `next(err)` 手动传递）
+- 路径匹配正则语法变化
 
-# 2. 升级Express（高风险）
-npm install express@^5.2.1 @types/express@^5.2.1 --save
+**第四阶段 — MQTT 5.3→5.15 + Socket.IO 4.7→4.8（低风险）**:
+```bash
+npm install mqtt@^5.15.1 socket.io@^4.8.3 winston@^3.19.0
 ```
+MQTT 5.15: 改进 MQTT 5.0 协议支持、更好的 WebSocket 传输、连接稳定性修复。
+Socket.IO 4.8: 新增 `serverSideUpgrade` 选项、底层 engine.io 升级。
 
-### 第三阶段：数据库和其他工具升级（2周）
+**第五阶段 — TypeScript 5→6**:
 ```bash
-# 1. 升级Prisma
-npm install prisma@^7.7.0 @prisma/client@^7.7.0 --save
-npx prisma generate
-
-# 2. 升级邮件和工具库
-npm install nodemailer@^8.0.5 mailparser@^3.9.6 winston@^3.13.0 --save
-
-# 3. 替换Moment.js
-npm uninstall moment
-npm install date-fns --save
-```
-
-### 第四阶段：测试和优化（1-2周）
-- 全面测试所有AI功能
-- 性能优化和安全测试
-- 文档更新和团队培训
-
-## 🎯 关键改进建议
-
-### ai-email-manager 优化重点
-1. **邮件处理效率**: 利用Mailparser 3的新特性优化解析性能
-2. **AI功能增强**: 升级OpenAI 6，利用结构化输出功能
-3. **用户体验**: 升级到React 19和Vite 8，提升前端性能
-4. **安全性**: 升级所有依赖，修复已知漏洞
-
-### ai-workspace-orchestrator 优化重点
-1. **多模型支持**: 升级AI SDK，支持Anthropic、OpenAI、Google Gemini多模型
-2. **性能优化**: 利用Express 5和Prisma 7提升系统性能
-3. **架构现代化**: 实现事件驱动架构和插件化设计
-4. **可扩展性**: 优化工作流引擎，支持复杂业务逻辑
-
-### 通用优化建议
-1. **监控增强**: 升级Winston，实现更好的日志和监控
-2. **错误处理**: 利用新的AI SDK改进错误处理和重试机制
-3. **成本控制**: 实现智能模型选择和缓存机制
-4. **开发效率**: 升级构建工具，提升开发体验
-
-## 💰 升级ROI分析
-
-### 投入成本预估
-- **开发时间**: 5-7周（包括测试和修复）
-- **测试资源**: 完整的QA环境和自动化测试
-- **培训成本**: 团队新技术栈培训，1-2周
-- **总投入**: 约7-9周开发时间
-
-### 预期收益
-- **性能提升**: API响应时间减少25-45%，数据处理速度提升40-60%
-- **成本节约**: AI API调用成本减少25-35%（智能缓存和模型选择）
-- **功能增强**: 支持多AI模型，提升智能化水平
-- **开发效率**: 新功能开发速度提升30-50%
-- **用户体验**: 前端性能提升，用户满意度提升40%
-- **维护成本**: 减少bug修复工作量，降低35-45%
-
-### 风险控制
-- **渐进式升级**: 分阶段升级，每个阶段都有测试验证
-- **回滚机制**: 准备完整的回滚方案
-- **灰度发布**: 先在测试环境验证，再逐步推广到生产环境
-- **监控预警**: 实时监控系统状态，及时发现和解决问题
-
-*注：建议每6天进行一次技术调研，及时跟踪技术发展和依赖更新情况。*
-
----
-
-**调研日期**: 2026-04-08  
-**调研人员**: 孔明 (深度技术调研)  
-**调研范围**: ai-gardening-designer 和 ai-workspace-orchestrator 技术栈分析和优化建议
-
-## 新增项目分析 (2026-04-08)
-
-### 📊 ai-gardening-designer 技术栈分析（本次重点调研）
-
-**当前依赖版本状态**:
-- @prisma/client: ^5.7.1 → **重大升级: ^7.7.0** (主要版本跳跃)
-- openai: ^4.26.0 → **建议升级到 ^6.33.0** (重大版本更新)
-- axios: ^1.6.2 → **建议升级到 ^1.14.0** (性能优化和安全修复)
-- sharp: ^0.33.2 → **建议升级到 ^0.33.4** (安全修复和性能优化)
-- redis: ^4.6.12 → **建议升级到 ^4.7.4** (性能改进和特性增强)
-- express: ^4.18.2 → **建议升级到 ^5.2.1** (主要版本跳跃)
-- typescript: ^5.9.3 → **建议升级到 ^6.0.2** (TypeScript 6新特性)
-
-**依赖升级建议**:
-1. **Prisma 5.7.1 → 7.7.0**: 查询性能优化35%、改进的TypeScript支持、新增模糊搜索功能用于植物匹配
-2. **OpenAI 4.26.0 → 6.33.0**: 新增结构化输出功能、改进的流式响应、更好的错误处理
-3. **Axios 1.6.2 → 1.14.0**: 更好的TypeScript支持、改进的性能和错误处理
-4. **Sharp 0.33.2 → 0.33.4**: 图像处理安全修复、性能优化、新的图像格式支持
-5. **Redis 4.6.12 → 4.7.4**: 内存优化、更好的连接管理、新功能支持
-6. **Express 4.18.2 → 5.2.1**: 完全重写的中间件系统、内置路由优化、更好的错误处理
-7. **TypeScript 5.9.3 → 6.0.2**: 支持新的ESM特性、更好的类型推断、性能提升
-
-**架构优化方向**:
-- 利用Prisma 7的模糊搜索优化植物识别算法，提升识别准确率
-- 实现植物图像的智能预加载和缓存机制，减少重复处理
-- 添加WebSocket实现园艺建议的实时推送更新
-- 引入事件驱动架构处理园艺任务提醒和养护计划
-- 实现多级缓存策略，优化图片处理和AI调用性能
-
-**性能提升机会**:
-- 图像处理缓存机制，减少50%重复计算
-- AI API调用智能队列，提升并发处理能力40%
-- 植物数据查询优化，响应时间提升35%
-- 前端组件懒加载，减少初始加载时间45%
-- Redis缓存层优化，减少数据库访问频率60%
-
-### 📊 ai-workspace-orchestrator 技术栈分析（更新）
-
-**当前依赖版本状态**:
-- @prisma/client: ^5.1.1 → **重大升级: ^7.7.0** (主要版本跳跃)
-- express: ^4.18.2 → **建议升级到 ^5.2.1** (主要版本跳跃)
-- openai: ^4.26.0 → **建议升级到 ^6.33.0** (重大版本更新)
-- @anthropic-ai/sdk: ^0.4.3 → **建议升级到 ^0.85.0** (重大版本更新)
-- @google/generative-ai: ^0.1.3 → **建议升级到 ^0.24.1** (重要更新)
-- winston: ^3.10.0 → **建议升级到 ^3.13.0** (性能改进)
-- typescript: ^5.1.6 → **建议升级到 ^6.0.2** (TypeScript 6新特性)
-
-**依赖升级建议**:
-1. **Prisma 5.1.1 → 7.7.0**: 查询性能提升40%、更好的类型安全、新增性能分析工具
-2. **Express 4.18.2 → 5.2.1**: 完全重写的中间件系统、内置路由优化、更好的错误处理
-3. **OpenAI 4.26.0 → 6.33.0**: 结构化输出、智能重试、改进的流式响应处理
-4. **Anthropic AI 0.4.3 → 0.85.0**: 新增工具调用功能、改进的错误处理、更好的提示工程支持
-5. **Google Gemini 0.1.3 → 0.24.1**: 增强的多模态支持、改进的安全控制、更好的性能
-6. **Winston 3.10.0 → 3.13.0**: 更好的日志格式化、性能监控增强、新特性支持
-7. **TypeScript 5.1.6 → 6.0.2**: 支持新的ESM特性、更好的类型推断、编译性能提升
-
-**架构优化方向**:
-- 升级AI SDK支持，实现多模型混合智能处理策略
-- 利用Express 5的新特性优化API网关性能和中间件管理
-- 实现工作流引擎的插件化架构，支持动态扩展
-- 引入事件驱动架构提升系统可扩展性和响应能力
-- 实现智能负载均衡和资源调度，优化多AI模型调用
-
-**性能提升机会**:
-- AI模型智能选择机制，降低35%计算成本
-- 异步任务队列优化，提升并发处理能力55%
-- WebSocket实时通信，延迟减少65%
-- 数据库连接池优化，提升查询效率45%
-- 智能缓存机制，减少重复计算50%
-
-## 🔧 关键技术风险评估
-
-### 高风险依赖升级（需要全面测试）
-1. **Express 4.x → 5.x**: 主要版本跳跃，中间件API可能有重大变更
-2. **Prisma 5.x → 7.x**: 数据库工具重大版本，需要验证所有查询和迁移
-3. **@anthropic-ai/sdk 0.4.x → 0.85.x**: AI SDK重大更新，需要重写提示词和调用逻辑
-
-### 中等风险依赖升级
-1. **OpenAI 4.x → 6.x**: API接口可能有调整，需要测试AI功能
-2. **@google/generative-ai 0.1.x → 0.24.x**: 谷歌AI模型API可能有变化
-3. **TypeScript 5.x → 6.x**: 主要版本更新，但相对稳定
-
-### 低风险依赖升级
-1. **Winston 3.10 → 3.13**: 日志库更新，相对安全
-2. **Axios 1.6 → 1.14**: HTTP客户端升级，风险较低
-3. **Sharp 0.33.x**: 图像处理库小版本更新，风险可控
-
-## 📈 升级实施计划
-
-### 第一阶段：基础设施升级（1周）
-```bash
-# 1. 升级TypeScript和构建工具
 npm install typescript@^6.0.2 --save-dev
-
-# 2. 升级日志库
-npm install winston@^3.13.0 --save
 ```
+TypeScript 6: ESM 优先的 module 解析、`--moduleResolution bundler` 默认值、更好的类型推断。
 
-### 第二阶段：核心依赖升级（2周）
-```bash
-# 1. 升级Express（高风险）
-npm install express@^5.2.1 @types/express@^5.2.1 --save
+### 架构优化建议
 
-# 2. 升级AI相关依赖
-npm install openai@^6.33.0 @anthropic-ai/sdk@^0.85.0 @google/generative-ai@^0.24.1 --save
-
-# 3. 升级Prisma数据库工具
-npm install prisma@^7.7.0 @prisma/client@^7.7.0 --save
-npx prisma generate
-```
-
-### 第三阶段：工具库升级（1周）
-```bash
-# 1. 升级其他依赖
-npm install axios@^1.14.0 sharp@^0.33.4 redis@^4.7.4 --save
-```
-
-### 第四阶段：测试和优化（1-2周）
-- 全面测试所有AI功能
-- 性能优化和安全测试
-- 文档更新和团队培训
-
-## 🎯 关键改进建议
-
-### ai-gardening-designer 优化重点
-1. **图像处理优化**: 利用Sharp新特性优化植物图像处理性能
-2. **AI功能增强**: 升级OpenAI 6，利用结构化输出功能提升园艺建议准确性
-3. **缓存策略**: 实现多级缓存，优化图片处理和AI调用性能
-4. **用户体验**: 升级到TypeScript 6，提升代码质量和开发效率
-
-### ai-workspace-orchestrator 优化重点
-1. **多模型支持**: 升级AI SDK，支持Anthropic、OpenAI、Google Gemini多模型智能选择
-2. **性能优化**: 利用Express 5和Prisma 7提升系统整体性能
-3. **架构现代化**: 实现事件驱动架构和插件化工作流引擎
-4. **可扩展性**: 优化资源调度，支持复杂业务场景和大规模并发
-
-### 通用优化建议
-1. **监控增强**: 升级Winston，实现结构化日志和性能监控
-2. **错误处理**: 利用新的AI SDK改进错误处理和重试机制
-3. **成本控制**: 实现智能模型选择和缓存策略，降低AI API调用成本
-4. **开发效率**: 升级TypeScript 6，利用新特性提升开发体验
-
-## 💰 升级ROI分析
-
-### 投入成本预估
-- **开发时间**: 4-6周（包括测试和修复）
-- **测试资源**: 完整的QA环境和自动化测试
-- **培训成本**: 团队新技术栈培训，1周
-- **总投入**: 约5-7周开发时间
-
-### 预期收益
-- **性能提升**: API响应时间减少30-50%，数据处理速度提升40-60%
-- **成本节约**: AI API调用成本减少30-40%（智能缓存和模型选择）
-- **功能增强**: 支持多AI模型，提升智能化水平和用户体验
-- **开发效率**: 新功能开发速度提升35-55%
-- **用户体验**: 前端和后端性能提升，用户满意度提升45%
-- **维护成本**: 减少bug修复工作量，降低40-50%
-
-### 风险控制
-- **渐进式升级**: 分阶段升级，每个阶段都有测试验证
-- **回滚机制**: 准备完整的回滚方案
-- **灰度发布**: 先在测试环境验证，再逐步推广到生产环境
-- **监控预警**: 实时监控系统状态，及时发现和解决问题
+- **健康数据流重构**: 当前 MQTT→Express→Socket.IO 的链路可以简化。考虑用 Fastify 替代 Express（性能提升 ~30%），或在 Express 5 模式下利用其改进的路由性能
+- **告警引擎独立化**: 将健康告警逻辑从主服务抽离为独立 worker（用 `cron` 或 BullMQ），避免 MQTT 消息处理阻塞 HTTP 请求
+- **IoT 数据时序存储**: 如果监测数据量大，考虑引入 TimescaleDB（PostgreSQL 扩展）配合 Prisma 使用，时序查询性能远优于普通索引
+- **Zod Schema 统一**: 升级后，健康数据的验证 schema 可同时用于 API 输入验证和 OpenAI 结构化输出的类型定义，减少重复代码
 
 ---
 
-**报告生成时间**: 2026-04-08  
-**下次调研**: 2026-04-14  
+## 2. ai-workspace-orchestrator（跟踪复查）
+
+**上次调研**: 2026-04-09，当时建议优先升级 AI SDK。本次检查是否有变化。
+
+### 依赖版本复查
+
+| 依赖 | 当前 | 最新 | 状态变化 |
+|------|------|------|---------|
+| @anthropic-ai/sdk | ^0.22.0 | **0.88.0** | 🔴 未升级，落后 66 个 minor（上次 64） |
+| openai | ^4.36.0 | **6.34.0** | 🔴 未升级 |
+| @google/generative-ai | ^0.21.0 | **0.24.1** | 🟡 未升级 |
+| zod | ^3.22.2 | **4.3.6** | 🔴 未升级（是 openai@6 的前置依赖） |
+| express | ^4.18.2 | **5.2.1** | 🔴 未升级 |
+| prisma / @prisma/client | ^7.6.0 | **7.7.0** | 🟡 差 1 minor |
+| redis | ^5.11.0 | **5.11.0** | ✅ 最新 |
+| typescript | ^6.0.2 | **6.0.2** | ✅ 最新 |
+| vitest | ^4.1.3 | **4.1.3** | ✅ 最新 |
+
+**结论**: 自上次调研以来，项目未执行任何依赖升级。AI SDK 滞后问题持续恶化。
+
+### 升级优先级重申（含具体命令）
+
+**紧急 — Zod 3→4（阻塞 OpenAI 升级）**:
+```bash
+# Zod 4 是 OpenAI 6.x 的 peerDependency
+npx zod-v3-to-v4  # 社区 codemod 自动迁移
+npm install zod@^4.3.6
+```
+
+**紧急 — 三大 AI SDK 升级**:
+```bash
+# OpenAI: 新增 Responses API、结构化输出、mcp 支持
+npm install openai@^6.34.0
+
+# Anthropic 0.22→0.88: 支持 tool_use、JSON mode、vision、extended thinking
+npm install @anthropic-ai/sdk@^0.88.0
+
+# Google 0.21→0.24: Gemini 2.5 支持、改进多模态
+npm install @google/generative-ai@^0.24.1
+```
+
+**高优 — Express 4→5**:
+```bash
+npx codemod@latest @expressjs/v5-migration-recipe
+npm install express@^5.2.1
+```
+
+**低优 — Prisma 7.6→7.7**:
+```bash
+npm install prisma@^7.7.0 @prisma/client@^7.7.0 && npx prisma generate
+```
+
+### 新增架构建议
+
+- **OpenAI Responses API**: openai@6.x 引入了 `client.responses.create()` API，支持多轮对话状态管理，可简化当前工作流引擎中的对话上下文管理代码
+- **Anthropic Extended Thinking**: @anthropic-ai/sdk@0.88 支持 Claude 的 extended thinking 功能，适合需要深度推理的复杂工作流编排场景
+- **统一 LLM Adapter**: 建议创建 `src/adapters/llm/` 目录，为三家 AI 供应商实现统一接口，包含 `chat()`、`structuredOutput()`、`stream()` 方法，工作流引擎只依赖抽象层
+
+---
+
+## 3. 全局技术雷达更新
+
+### 12 项目技术健康度（2026-04-11）
+
+| 项目 | Prisma | Express | OpenAI | TS | 总体评分 |
+|------|--------|---------|--------|----|---------|
+| ai-workspace-orchestrator | ✅ 7.6 | 🔴 4.18 | 🔴 4.36 | ✅ 6.0 | ⭐⭐⭐⭐ |
+| ai-family-health-guardian | 🔴 5.6 | 🔴 4.18 | 🔴 4.26 | 🔴 5.2 | ⭐⭐ |
+| ai-carbon-footprint-tracker | 🔴 5.6 | 🔴 4.18 | 🔴 4.20 | 🔴 5.x | ⭐⭐ |
+| ai-rental-detective | 🔴 5.4 | 🔴 4.18 | 🔴 4.26 | 🟡 5.x | ⭐⭐ |
+| ai-email-manager | 🔴 5.7 | 🔴 4.18 | 🔴 4.26 | 🔴 5.3 | ⭐⭐ |
+| ai-gardening-designer | 🔴 5.7 | 🔴 4.18 | 🔴 4.26 | 🟡 5.9 | ⭐⭐½ |
+| ai-contract-reader | 🔴 5.x | 🔴 4.18 | 🔴 4.x | 🔴 5.x | ⭐⭐ |
+| ai-appointment-manager | 🔴 5.x | 🔴 4.18 | 🔴 4.x | 🔴 5.x | ⭐⭐ |
+| ai-interview-coach | 🔴 5.x | 🔴 4.18 | 🔴 4.x | 🔴 5.x | ⭐⭐ |
+| ai-error-diagnostician | 🔴 5.x | 🔴 4.18 | 🔴 4.x | 🔴 5.x | ⭐⭐ |
+| ai-voice-notes-organizer | 🔴 5.x | 🔴 4.18 | 🔴 4.x | 🔴 5.x | ⭐⭐ |
+
+**关键发现**: workspace-orchestrator 是唯一一个已经完成 Prisma 7 + TS 6 升级的项目，但 AI SDK 仍然是所有项目的共同短板。
+
+### 推荐全局升级顺序
+
+1. **Zod 3→4** (所有使用 zod 的项目) — 解锁 OpenAI 6 兼容
+2. **OpenAI 4→6** (全部 12 项目) — 结构化输出 + Responses API 是质变
+3. **Prisma 5→7** (10 个项目) — 查询引擎重写，性能 + 类型安全
+4. **Express 4→5** (10 个项目) — 用官方 codemod 降低迁移成本
+5. **TypeScript 5→6** (11 个项目) — ESM 优先、更好的类型推断
+
+---
+
+**报告生成时间**: 2026-04-11 18:03 CST  
+**数据来源**: npm registry (实时查询 2026-04-11) + Express 官方迁移文档 + Prisma 7 升级指南  
+**下次调研**: 2026-04-12 00:00  
 **调研状态**: ✅ 完成
+
 ---
 
 # 深度技术调研 - 2026-04-09 06:00
@@ -610,7 +272,6 @@ npm install @google/generative-ai@^0.24.1
 | prisma / @prisma/client | ^5.4.2 | **7.7.0** | 🔴 落后 2 个大版本 |
 | openai | ^4.26.0 | **6.34.0** | 🔴 落后 2 个大版本 |
 | @mui/material | ^7.3.9 | **9.0.0** | 🔴 落后 1 个大版本 |
-| @mui/x-data-grid | ^8.28.1 | 需确认 | 🟡 可能需跟随 MUI 升级 |
 | @typescript-eslint/* | ^5.59.9 | **^8.58.0** | 🔴 落后 3 个大版本 |
 | express | ^4.18.2 | **5.2.1** | 🔴 落后 1 个大版本 |
 | react-router-dom | ^7.13.2 | **7.14.0** | ✅ 接近最新 |
@@ -621,56 +282,29 @@ npm install @google/generative-ai@^0.24.1
 
 **第一阶段 — TypeScript 工具链升级（低风险，高收益）**:
 ```bash
-# typescript-eslint 5→8 是必须的，5 已停止维护
 npm install @typescript-eslint/eslint-plugin@^8.58.0 @typescript-eslint/parser@^8.58.0 --save-dev
 ```
-注意: ESLint 8 配置格式在 ESLint 9 改为 flat config，但 8.x 仍可用，先不急着升 9。
 
 **第二阶段 — Prisma 5→7（高风险，建议独立分支）**:
-- Prisma 5→6: 主要是 `@prisma/client` 导入路径变化、`previewFeatures` 移除
-- Prisma 6→7: 查询引擎重写，性能大幅提升；需要 `npx prisma migrate dev` 重新生成 migration
-- 步骤:
-  ```bash
-  git checkout -b upgrade/prisma-7
-  npm install prisma@^7.7.0 @prisma/client@^7.7.0
-  npx prisma migrate dev  # 验证所有 migration 兼容
-  npm test                # 全量回归
-  ```
+```bash
+git checkout -b upgrade/prisma-7
+npm install prisma@^7.7.0 @prisma/client@^7.7.0
+npx prisma migrate dev  # 验证所有 migration 兼容
+npm test                # 全量回归
+```
 
 **第三阶段 — MUI 7→9（前端大升级）**:
-- MUI v9 (Material UI 9) 已发布，这是一次重大更新
-- 需要同步升级 `@mui/icons-material`、`@emotion/react`、`@emotion/styled`、`@mui/x-data-grid`
-- 建议阅读 MUI v8→v9 迁移指南后执行
-- `npm install @mui/material@^9.0.0 @mui/icons-material@^9.0.0`
+```bash
+npm install @mui/material@^9.0.0 @mui/icons-material@^9.0.0
+```
 
 **第四阶段 — OpenAI 4→6**（同 orchestrator 方案）
 
 ### 架构优化建议
 
-- **数据模型审查**: Prisma 从 5.4 直接跳到 7.7，建议趁升级机会审查 schema 设计，利用 Prisma 7 的 `@unique` 复合索引优化租金查询性能
-- **前端状态管理**: react-router-dom v7 已支持 data loading (loader pattern)，可考虑将部分数据获取从 useEffect 迁移到 route loader，减少瀑布式请求
-- **ESLint Flat Config**: 升级到 typescript-eslint 8 后，考虑同时迁移到 ESLint flat config (`eslint.config.mjs`)，为后续 ESLint 9 做准备
-
----
-
-## 3. 全局观察
-
-### 12 个项目的共性技术债
-
-| 技术 | 受影响项目数 | 严重程度 |
-|------|-------------|---------|
-| Express 4.x (未升级到 5) | **10/12** | 🔴 高 |
-| OpenAI SDK 4.x (未升级到 6) | **12/12** | 🔴 高 |
-| Prisma 5.x (未升级到 7) | **10/12** | 🔴 高 |
-| moment.js (应替换) | **2/12** | 🟡 中 |
-| typescript-eslint 5.x (已停止维护) | **3/12** | 🟡 中 |
-| MUI v5/v7 (未升级到 v9) | **3/12** | 🟡 中 |
-
-### 建议的全局升级策略
-
-1. **创建共享升级模板**: 在 `docs/` 下维护一个 `upgrade-checklist.md`，包含每个大版本升级的标准步骤和验证清单
-2. **优先升级 OpenAI SDK**: 所有 12 个项目都使用 openai@4.x，统一升级到 6.x 收益最大（结构化输出 + 性能）
-3. **逐步推进 Express 5**: 使用官方 codemod 批量处理，先在非关键项目上验证
+- **数据模型审查**: Prisma 从 5.4 直接跳到 7.7，建议趁升级机会审查 schema 设计
+- **前端状态管理**: react-router-dom v7 的 data loading (loader pattern) 可减少瀑布式请求
+- **ESLint Flat Config**: 升级 typescript-eslint 8 后，考虑迁移到 flat config
 
 ---
 
