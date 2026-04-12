@@ -1,112 +1,26 @@
-# 🔥 凤雏系统巡检报告
+# 🏥 项目健康巡检报告 — 2026-04-12 08:00
 
-> 生成时间: 2026-04-12 11:54 CST | 执行者: 凤雏自动巡检
-
----
-
-## 📊 总览
-
-| 指标 | 数值 |
-|------|------|
-| 运行环境 | Windows · zai/glm-5-turbo · thinking=high |
-| Cron任务总数 | 58个 |
-| 启用且正常 | 23个 |
-| 启用但有报错 | 8个（已修复） |
-| 已禁用 | 27个 |
-| Token使用率 | 6% (10k/200k) |
-| 月度额度 | 100%剩余 |
-
----
-
-## 🔧 本次修复
-
-### 问题：delivery.mode announce 在 webchat 环境下不可用
-
-8个启用任务设置 delivery.mode: announce 但当前无可用 channel，导致全部报错：Channel is required (no configured channels detected)
-
-**已修复任务列表：**
-
-| 任务名 | 连续错误 | 修复操作 |
-|--------|---------|---------|
-| PR Patrol - awesome-ai-ideas | 6次 | announce → none |
-| awesome-ai-ideas issue patrol | 4次 | announce → none |
-| 凤雏日志同步 | 4次 | announce → none |
-| Issue转PR检查凤雏 | 3次 | announce → none |
-| PR讨论巡逻 - 凤雏 (gemini) | 3次 | announce → none |
-| Issue转PR检查 (announce) | 2次 | announce → none |
-| PR讨论巡逻 - 凤雏 (thinking) | 2次 | announce → none |
-| awesome-ai-ideas PR converter | 1次 | announce → none |
+| 项目 | 状态 | Git | 最近提交 | README | 测试 | 备注 |
+|------|------|-----|----------|--------|------|------|
+| ai-appointment-manager | 🟡 | 📝14staged/16untracked | 7e159ac 2 days ago | ✅ | ✅ | 有未提交更改 |
+| ai-carbon-footprint-tracker | 🟡 | 📝24staged/1untracked | a5a8740 2 days ago | ✅ | ✅ | 有未提交更改 |
+| ai-career-soft-skills-coach-bak | 🟢 | ✅ clean | 6a5a1ee 2 weeks ago | ✅ | ✅ |  |
+| ai-contract-reader | 🟡 | 📝0staged/1untracked | b1de5ab 2 days ago | ✅ | ✅ | 有未提交更改 |
+| ai-email-manager | 🟢 | ✅ clean | 36ff430 5 days ago | ✅ | ✅ |  |
+| ai-error-diagnostician | 🟡 | 📝7staged/4untracked | 5645f37 2 weeks ago | ✅ | ✅ | 有未提交更改 |
+| ai-family-health-guardian | 🟡 | 📝1staged/1untracked | e9d9127 6 days ago | ✅ | ✅ | 有未提交更改 |
+| ai-gardening-designer | 🟡 | 📝20staged/11untracked | 007a79a 19 hours ago | ❌ | ✅ | 有未提交更改 |
+| ai-interview-coach | 🟡 | 📝1staged/0untracked | e1f1430 3 days ago | ✅ | ✅ | 有未提交更改 |
+| ai-rental-detective | 🟡 | 📝3staged/0untracked | 67ce09e 6 days ago | ✅ | ✅ | 有未提交更改 |
+| ai-voice-notes-organizer | 🟡 | 📝0staged/1untracked | 67feb1a 35 hours ago | ✅ | ✅ | 有未提交更改 |
+| ai-workspace-orchestrator | 🟡 | 📝0staged/17untracked | 8601854c4 73 minutes ago | ❌ | ✅ | 有未提交更改 |
+| appointment-manager | 🟢 | ✅ clean | 0b38bdf 2 weeks ago | ✅ | ❌ | 无测试 |
+| awesome-ai-ideas | 🟡 | 📝1staged/2untracked | 65e48b5 3 days ago | ✅ | ❌ | 有未提交更改 |
+| career-soft-skills-coach | 🟢 | ✅ clean | 003f6a7 2 weeks ago | ✅ | ❌ | 无测试 |
+| code-knowledge-map-generator | 🟡 | 📝2staged/1untracked | 74af50d 13 days ago | ✅ | ✅ | 有未提交更改 |
+| error-diagnostician | 🟢 | ✅ clean | fab7f3f 2 weeks ago | ✅ | ❌ | 无测试 |
+| romance-of-three-claws | 🟡 | 📝0staged/2untracked | b308502 10 days ago | ✅ | ✅ | 有未提交更改 |
 
 ---
-
-## 🔄 新增自动化
-
-### Cron自动巡检修复任务
-
-为避免未来再次需要人工介入，新增了自动巡检任务：Cron自动巡检修复，每4小时执行，thinking=high，超时300s。
-
-**巡检四阶段：**
-
-1. **全面扫描** - 启用+禁用任务全量检查
-2. **自动修复** - delivery问题自动修，重复/禁用给建议
-3. **性能分析** - 耗时分析 + 频率合理性评估
-4. **详细报告** - 数据驱动报告写入 memory/
-
----
-
-## 🔀 冗余任务分析
-
-当前58个任务中存在大量历史残留和功能重叠：
-
-| 功能组 | 启用版本数 | 禁用版本数 | 建议 |
-|--------|-----------|-----------|------|
-| Issue巡逻 | 3个 | 2个 | 合并为1个 |
-| Issue转PR | 4个 | 6个 | 合并为1个 |
-| PR巡逻 | 3个 | 5个 | 合并为1个 |
-| 仓库仪表盘 | 1个 | 11个 | 已合并，禁用可删 |
-| 日志同步 | 2个 | 1个 | 合并为1个 |
-| 孔明Issue抢滩 | 2个 | 3个 | 合并为1个 |
-
-**潜在节省**: 合并后可从31个启用+禁用减少到约8个核心任务
-
----
-
-## ⚠️ 需人工关注
-
-1. **27个已禁用任务清理** - 全部是历史残留，可安全删除
-2. **重复任务合并** - 同功能多版本增加token消耗，建议择优合并
-3. **孔明Review风格学习** - 因rate_limit被禁用，建议择机重新启用
-4. **三爪协作效率评估** - 上次执行是昨日18:50，正常运行
-
----
-
-## 📈 当前任务执行状态
-
-### 正常运行的核心任务
-
-| 任务 | 频率 | 耗时 | 状态 |
-|------|------|------|------|
-| CLAWX任务巡逻 | 30min | 51s | 正常 |
-| Issue讨论巡逻 | 3h | 99s | 正常 |
-| PR讨论巡逻 | 3h | 172s | 正常 |
-| 仓库数据仪表盘 | 3h | 19s | 正常 |
-| 凤雏Issue深度跟进 | 4h | 79s | 正常 |
-| Issue转PR检查 | 4h | 102s | 正常 |
-| 孔明Issue抢滩PR | 4h | 33s | 正常 |
-| 卧龙协作同步 | 4h | 332s | 正常 |
-| 仓库内容质量审计 | 6h | 103s | 正常 |
-| 2077日报创意发布 | 6h | 18s | 正常 |
-| 创意风暴与Issue提交 | 6h | 246s | 正常 |
-| PR内容质量深度评审 | 每天12:00 | 62s | 正常 |
-| 竞品生态分析 | 每天15:00 | 95s | 正常 |
-| 三爪协作效率评估 | 每天18:00 | 159s | 正常 |
-| 每日反思与优化 | 每天22:00 | 100s | 正常 |
-| 每日总结 | 每天23:00 | 120s | 正常 |
-| AI技术前沿扫描 | 每天09:00 | 93s | 正常 |
-| 凤雏每日报到 | 3次/天 | 96s | 正常 |
-| 凤雏日志同步 | 3次/天 | 85s | 正常 |
-| Cron自动巡检修复 | 4h | 新增 | 新增 |
-
----
-
-*此报告由凤雏自动生成并推送*
+巡检时间: 2026-04-12 08:00 CST
+项目总数: 18
