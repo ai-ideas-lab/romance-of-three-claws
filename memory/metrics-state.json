@@ -1,76 +1,168 @@
 {
-  "lastMetricsUpdate": "2026-04-12T20:24:27Z",
-  "collectionTime": "2026-04-12T20:24:27Z",
-  "stats": {
-    "totalProjects": 59,
-    "highValueProjects": 11,
-    "completedProjects": 10,
-    "inProgressProjects": 1,
-    "newProjects": 13,
-    "averageScore": 7.7,
-    "completionRate": 0.169,
-    "highValueRate": 0.186
+  "timestamp": "2026-04-13T00:44:00Z",
+  "period": "2026-04-13",
+  "metrics": {
+    "totalProjects": 10,
+    "activeProjects": 8,
+    "inactiveProjects": 2,
+    "totalCommits24h": 0,
+    "totalCommits7d": 90,
+    "totalContributors": 12,
+    "totalBranches": 23,
+    "totalIssues": 7,
+    "totalOpenIssues": 6,
+    "totalClosedIssues": 1
   },
-  "gitActivity": {
-    "commits24h": 0,
-    "commits7d": 54,
-    "commits14d": 69,
-    "commits30d": 82,
-    "linesAdded7d": 6547381,
-    "linesDeleted7d": 33352,
-    "branchesCount": 3,
-    "contributors24h": 0
+  "projectMetrics": {
+    "ai-appointment-manager": {
+      "branches": 2,
+      "contributors": 1,
+      "commits24h": 0,
+      "commits7d": 7,
+      "adds7d": 2666,
+      "dels7d": 2161,
+      "issues": 1,
+      "openIssues": 1,
+      "status": "active",
+      "trend": "stable"
+    },
+    "ai-carbon-footprint-tracker": {
+      "branches": 2,
+      "contributors": 1,
+      "commits24h": 0,
+      "commits7d": 1,
+      "adds7d": 447,
+      "dels7d": 0,
+      "issues": 0,
+      "openIssues": 0,
+      "status": "stable",
+      "trend": "stable"
+    },
+    "ai-contract-reader": {
+      "branches": 2,
+      "contributors": 1,
+      "commits24h": 0,
+      "commits7d": 4,
+      "adds7d": 1290,
+      "dels7d": 473,
+      "issues": 0,
+      "openIssues": 0,
+      "status": "active",
+      "trend": "growing"
+    },
+    "ai-email-manager": {
+      "branches": 2,
+      "contributors": 1,
+      "commits24h": 0,
+      "commits7d": 1,
+      "adds7d": 303,
+      "dels7d": 0,
+      "issues": 0,
+      "openIssues": 0,
+      "status": "stable",
+      "trend": "stable"
+    },
+    "ai-error-diagnostician": {
+      "branches": 1,
+      "contributors": 1,
+      "commits24h": 0,
+      "commits7d": 0,
+      "adds7d": 0,
+      "dels7d": 0,
+      "issues": 0,
+      "openIssues": 0,
+      "status": "inactive",
+      "trend": "declining"
+    },
+    "ai-gardening-designer": {
+      "branches": 2,
+      "contributors": 1,
+      "commits24h": 0,
+      "commits7d": 6,
+      "adds7d": 2698,
+      "dels7d": 1938,
+      "issues": 0,
+      "openIssues": 0,
+      "status": "active",
+      "trend": "growing"
+    },
+    "ai-interview-coach": {
+      "branches": 2,
+      "contributors": 1,
+      "commits24h": 0,
+      "commits7d": 1,
+      "adds7d": 575,
+      "dels7d": 1,
+      "issues": 0,
+      "openIssues": 0,
+      "status": "stable",
+      "trend": "stable"
+    },
+    "ai-rental-detective": {
+      "branches": 2,
+      "contributors": 1,
+      "commits24h": 0,
+      "commits7d": 1,
+      "adds7d": 560,
+      "dels7d": 200,
+      "issues": 0,
+      "openIssues": 0,
+      "status": "stable",
+      "trend": "stable"
+    },
+    "ai-voice-notes-organizer": {
+      "branches": 2,
+      "contributors": 1,
+      "commits24h": 0,
+      "commits7d": 2,
+      "adds7d": 578,
+      "dels7d": 210,
+      "issues": 0,
+      "openIssues": 0,
+      "status": "stable",
+      "trend": "stable"
+    },
+    "ai-workspace-orchestrator": {
+      "branches": 5,
+      "contributors": 2,
+      "commits24h": 0,
+      "commits7d": 67,
+      "adds7d": 6625077,
+      "dels7d": 0,
+      "issues": 6,
+      "openIssues": 6,
+      "status": "very_active",
+      "trend": "exploding"
+    }
   },
-  "projectStatus": {
-    "completed": 10,
-    "inProgress": 1,
-    "new": 13,
-    "highValue": 11,
-    "mediumValue": 3,
-    "skipped": 19,
-    "lowValue": 13
+  "trendIndicators": {
+    "codeGrowthRate": {
+      "avgGrowth7d": 9975.7,
+      "fastestGrowing": "ai-workspace-orchestrator",
+      "mostActive": "ai-workspace-orchestrator"
+    },
+    "issueResolutionRate": {
+      "resolutionRate": 14.3,
+      "openIssues": 6,
+      "closedIssues": 1
+    },
+    "commitActivityScore": {
+      "avgCommitsPerProjectPerWeek": 9,
+      "mostActiveProject": "ai-workspace-orchestrator",
+      "inactiveProjects": 1
+    }
   },
-  "topProjects": {
-    "completed": [
-      {
-        "name": "AI预约管家",
-        "status": "生产就绪",
-        "completedAt": "2026-03-30T18:45:00Z"
-      },
-      {
-        "name": "AI碳足迹追踪器", 
-        "status": "生产就绪",
-        "completedAt": "2026-03-30T08:45:00Z"
-      },
-      {
-        "name": "AI职业软技能导师",
-        "status": "生产就绪", 
-        "completedAt": "2026-03-29T02:30:00Z"
-      }
-    ],
-    "highValue": [
-      {
-        "name": "AI个人成长教练",
-        "score": 8.4,
-        "priority": 1
-      },
-      {
-        "name": "AI简历诊断师",
-        "score": 8.4,
-        "priority": 1
-      },
-      {
-        "name": "AI音乐创作智能伙伴",
-        "score": 8.2,
-        "priority": 2
-      }
-    ]
-  },
-  "trends": {
-    "codeGrowthRate": "极高",
-    "commitActivity": "稳定",
-    "developmentEfficiency": "良好",
-    "projectQuality": "高"
-  },
-  "nextTrackingTime": "2026-04-12T22:24:27Z"
+  "alerts": [
+    "ai-appointment-manager: 安全漏洞需要立即修复",
+    "ai-error-diagnostician: 零提交需要重新激活",
+    "ai-workspace-orchestrator: 大量代码变更需要审查",
+    "24小时零提交：所有项目需要建立开发节奏"
+  ],
+  "recommendations": [
+    "建立项目最小提交频率标准",
+    "加强安全漏洞管理机制",
+    "促进项目间知识共享",
+    "定期清理和合并分支",
+    "完善Issue处理流程"
+  ]
 }
