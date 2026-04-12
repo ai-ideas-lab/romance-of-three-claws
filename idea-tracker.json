@@ -29,20 +29,34 @@
       "completedAt": "2026-03-30T18:45:00Z"
     },
     "ai-career-soft-skills-coach": {
-      "name": "AI 职场软技能导师",
-      "file": "ai-career-soft-skills-coach.md",
-      "status": "completed",
+      "name": "AI职场软技能导师",
+      "file": "awesome-ai-ideas/ideas/ai-career-soft-skills-coach.md",
+      "status": "high-value",
       "scores": {
         "technicalFeasibility": 9,
-        "marketDemand": 8,
-        "innovation": 8,
-        "developmentCost": 8,
-        "commercialPotential": 9
+        "marketDemand": 9,
+        "innovation": 7,
+        "developmentCost": 7,
+        "commercialPotential": 8
       },
-      "totalScore": 8.4,
-      "summary": "职场新人刚需，场景模拟训练，B2B/B2C双模式",
-      "priority": 2,
-      "completedAt": "2026-03-29T02:30:00Z"
+      "totalScore": 8,
+      "priority": 5,
+      "evaluationDate": "2026-04-04T02:30:00Z",
+      "evaluation": {
+        "evaluator": "孔明",
+        "keyStrengths": [
+          "职场新人刚需痛点",
+          "场景模拟训练创新",
+          "邮件优化和会议准备实用",
+          "B2B企业培训市场大",
+          "学习曲线平缓，易推广"
+        ],
+        "developmentStrategy": "MVP场景模拟→邮件优化→企业版功能",
+        "marketOpportunity": "职场培训市场，年度培训预算充足",
+        "riskLevel": "中等",
+        "estimatedTimeline": "4-6个月完成MVP",
+        "notes": "内容质量要求高，需要职场专家持续更新"
+      }
     },
     "ai-contract-reader": {
       "name": "AI 合同阅读助手",
@@ -139,7 +153,7 @@
         "developmentCost": 8,
         "commercialPotential": 8
       },
-      "totalScore": 8.0,
+      "totalScore": 8,
       "summary": "面试模拟训练，实时反馈，求职者刚需",
       "priority": 8,
       "startedAt": "2026-03-29T12:50:00Z",
@@ -186,7 +200,7 @@
         "developmentCost": 7,
         "commercialPotential": 5
       },
-      "totalScore": 6.0,
+      "totalScore": 6,
       "summary": "数字清理，需求弱，付费意愿低",
       "priority": null
     },
@@ -246,7 +260,7 @@
         "developmentCost": 7,
         "commercialPotential": 5
       },
-      "totalScore": 6.0,
+      "totalScore": 6,
       "summary": "穿搭建议，市场小众，竞争激烈",
       "priority": null
     },
@@ -351,7 +365,7 @@
         "developmentCost": 7,
         "commercialPotential": 5
       },
-      "totalScore": 6.0,
+      "totalScore": 6,
       "summary": "技术会议发言，场景过于细分",
       "priority": null
     },
@@ -381,7 +395,7 @@
         "developmentCost": 7,
         "commercialPotential": 5
       },
-      "totalScore": 6.0,
+      "totalScore": 6,
       "summary": "能源账单分析，场景低频，智能家居已有",
       "priority": null
     },
@@ -459,19 +473,32 @@
     "ai-carbon-footprint-tracker": {
       "name": "AI 碳足迹追踪助手",
       "file": "awesome-ai-ideas/ai-carbon-footprint-tracker.md",
-      "status": "completed",
+      "status": "high-value",
       "scores": {
         "technicalFeasibility": 8,
-        "marketDemand": 9,
-        "innovation": 8,
-        "developmentCost": 7,
+        "marketDemand": 8,
+        "innovation": 7,
+        "developmentCost": 6,
         "commercialPotential": 8
       },
-      "totalScore": 8.0,
-      "summary": "AI驱动的个人碳足迹追踪与管理工具，从模糊环保概念到具体减排行动",
-      "priority": 1,
-      "startedAt": "2026-03-30T19:45:00Z",
-      "completedAt": "2026-03-30T08:45:00Z"
+      "totalScore": 7.8,
+      "summary": "AI驱动的个人碳足迹追踪与管理工具",
+      "priority": 5,
+      "evaluationDate": "2026-03-31T02:30:00Z",
+      "evaluation": {
+        "evaluator": "孔明",
+        "keyStrengths": [
+          "环保趋势契合",
+          "多维度数据整合",
+          "社交激励机制",
+          "B2B企业ESG需求",
+          "商业模式多元"
+        ],
+        "developmentStrategy": "数据源对接→AI分析引擎→社交功能",
+        "marketOpportunity": "环保科技市场，ESG政策利好",
+        "riskLevel": "中等",
+        "estimatedTimeline": "6-8个月完成MVP"
+      }
     },
     "ai-workspace-orchestrator": {
       "name": "AI Workspace Orchestrator",
@@ -488,11 +515,11 @@
       "summary": "企业级AI工作流自动化平台，通过自然语言界面智能调度多个AI引擎",
       "priority": 1,
       "startedAt": "2026-03-30T19:45:00Z",
-      "lastUpdated": "2026-04-08T02:15:00Z",
+      "lastUpdated": "2026-04-12T00:45:00Z",
       "githubUrl": "https://github.com/ai-ideas-lab/ai-workspace-orchestrator",
       "localPath": "/Users/wangshihao/projects/openclaws/ai-workspace-orchestrator",
       "createdAt": "2026-03-30",
-      "phase": "工作流执行历史和监控功能已实现，API系统完整",
+      "phase": "UserAuthService已实现：用户注册/登录/JWT令牌管理/角色更新，18个测试全通过",
       "evaluation": {
         "evaluator": "孔明",
         "evaluationDate": "2026-03-31T02:30:00Z",
@@ -530,21 +557,55 @@
           "用户自定义模板支持",
           "模板搜索和分类功能",
           "模板使用次数统计",
-          "完整的单元测试覆盖"
+          "完整的单元测试覆盖",
+          "PostgreSQL数据库集成服务实现",
+          "数据库集成服务（DatabaseIntegrationService）",
+          "AI引擎集成服务（AIEngineIntegrationService）",
+          "统一数据库与AI引擎集成接口",
+          "数据迁移功能从内存到PostgreSQL",
+          "AI引擎健康检查机制",
+          "集成测试框架实现",
+          "performance-monitor.test.ts 断言修复（getRecentMetrics排序 + API Handlers数据隔离）",
+          "自然语言解析API端点（parse/entities/intent/commands）",
+          "NLP路由注册到Express服务器",
+          "NLP服务完整单元测试（20个测试全部通过）",
+          "工作流步骤重试机制（指数退避 + 可配置策略）",
+          "步骤类型感知的默认重试策略（AI/API/数据）",
+          "Webhook 外部集成服务（注册/投递/重试/HMAC签名）",
+          "Webhook API 路由（CRUD + 测试端点 + 投递记录）",
+          "Webhook 单元测试（23/23 全部通过）",
+          "资源级访问控制服务（ResourceAccessService）",
+          "资源所有权注册和自动 admin 授权",
+          "细粒度访问共享（read/write/admin 层级）",
+          "基于时间的访问过期机制",
+          "资源类型隔离（workflow/template/engine/dashboard）",
+          "ResourceAccessService 单元测试（14/14 全部通过）",
+          "优先级请求队列（RequestQueue）- 负载均衡+熔断器集成",
+          "DashboardService - 实时监控仪表板聚合服务（getDashboardSummary + getAlerts）",
+          "UserAuthService - 用户注册/登录/JWT令牌管理/角色更新（register + login + verifyToken）"
         ],
-        "inProgress": [
-          "数据库集成（当前使用内存存储）",
-          "AI引擎集成实现"
-        ],
+        "inProgress": [],
         "next": [
           "React前端界面开发",
-          "PostgreSQL数据库集成",
-          "OpenAI/Anthropic API集成",
           "实时监控仪表板",
           "用户权限管理系统",
           "工作流模板编辑器",
-          "部署和CI/CD配置"
-        ]
+          "部署和CI/CD配置",
+          "生产环境PostgreSQL优化",
+          "高级AI功能实现"
+        ],
+        "testStatus": {
+          "lastRun": "2026-04-12T00:45:00Z",
+          "suitesPassed": 9,
+          "suitesFailed": 17,
+          "testsPassed": 193,
+          "testsFailed": 21,
+          "knownIssues": [
+            "3个测试文件混用vitest导入（需改为jest）",
+            "PrismaClient engine=client需要adapter配置",
+            "git push因frontend/node_modules大文件被GitHub拒绝"
+          ]
+        }
       }
     },
     "ai-gardening-designer": {
@@ -686,36 +747,6 @@
         "estimatedTimeline": "4-6个月完成MVP"
       }
     },
-    "ai-carbon-footprint-tracker": {
-      "name": "AI 碳足迹追踪助手",
-      "file": "awesome-ai-ideas/ai-carbon-footprint-tracker.md",
-      "status": "high-value",
-      "scores": {
-        "technicalFeasibility": 8,
-        "marketDemand": 8,
-        "innovation": 7,
-        "developmentCost": 6,
-        "commercialPotential": 8
-      },
-      "totalScore": 7.8,
-      "summary": "AI驱动的个人碳足迹追踪与管理工具",
-      "priority": 5,
-      "evaluationDate": "2026-03-31T02:30:00Z",
-      "evaluation": {
-        "evaluator": "孔明",
-        "keyStrengths": [
-          "环保趋势契合",
-          "多维度数据整合",
-          "社交激励机制",
-          "B2B企业ESG需求",
-          "商业模式多元"
-        ],
-        "developmentStrategy": "数据源对接→AI分析引擎→社交功能",
-        "marketOpportunity": "环保科技市场，ESG政策利好",
-        "riskLevel": "中等",
-        "estimatedTimeline": "6-8个月完成MVP"
-      }
-    },
     "ai-safety-guardian": {
       "name": "AI 数字防骗小卫士",
       "file": "awesome-ai-ideas/ai-safety-guardian.md",
@@ -815,7 +846,7 @@
         "developmentCost": 7,
         "commercialPotential": 8
       },
-      "totalScore": 8.0,
+      "totalScore": 8,
       "priority": 3,
       "evaluationDate": "2026-04-04T02:30:00Z",
       "evaluation": {
@@ -924,66 +955,36 @@
         "notes": "学术数据接入难度大，B2B销售周期长"
       }
     },
-    "ai-career-soft-skills-coach": {
-      "name": "AI职场软技能导师",
-      "file": "awesome-ai-ideas/ideas/ai-career-soft-skills-coach.md",
-      "status": "high-value",
-      "scores": {
-        "technicalFeasibility": 9,
-        "marketDemand": 9,
-        "innovation": 7,
-        "developmentCost": 7,
-        "commercialPotential": 8
-      },
-      "totalScore": 8.0,
-      "priority": 5,
-      "evaluationDate": "2026-04-04T02:30:00Z",
-      "evaluation": {
-        "evaluator": "孔明",
-        "keyStrengths": [
-          "职场新人刚需痛点",
-          "场景模拟训练创新",
-          "邮件优化和会议准备实用",
-          "B2B企业培训市场大",
-          "学习曲线平缓，易推广"
-        ],
-        "developmentStrategy": "MVP场景模拟→邮件优化→企业版功能",
-        "marketOpportunity": "职场培训市场，年度培训预算充足",
-        "riskLevel": "中等",
-        "estimatedTimeline": "4-6个月完成MVP",
-        "notes": "内容质量要求高，需要职场专家持续更新"
-      }
-    },
     "ai-neurodiversity-family-ai": {
-      "name": "AI神经多样性家庭智囊",
-      "file": "awesome-ai-ideas/prs/0308-ai-neurodiversity-family-ai.md",
-      "status": "high-value",
+      "name": "AI神经多样性家庭助手",
+      "file": "prs/0308-ai-neurodiversity-family-ai.md",
+      "status": "new",
       "scores": {
         "technicalFeasibility": 7,
         "marketDemand": 9,
-        "innovation": 8,
-        "developmentCost": 7,
+        "innovation": 9,
+        "developmentCost": 6,
         "commercialPotential": 8
       },
-      "totalScore": 8.0,
-      "priority": 6,
-      "evaluationDate": "2026-04-04T02:30:00Z",
+      "totalScore": 7.8,
+      "summary": "为神经多样性家庭提供AI支持的沟通和协作工具，促进家庭和谐",
+      "priority": null,
+      "evaluationDate": "2026-04-02T01:00:00Z",
       "evaluation": {
         "evaluator": "孔明",
         "keyStrengths": [
-          "ADHD/自闭症家庭刚需（1500-2000万户）",
-          "垂直领域深度专业知识壁垒",
-          "行为分析+情绪支持双引擎",
-          "B2B2C机构合作模式获客成本低",
-          "社会价值显著，政策支持力度大"
+          "社会价值显著",
+          "技术需求明确",
+          "家庭场景特殊",
+          "AI情感识别",
+          "个性化支持"
         ],
-        "developmentStrategy": "MVP文本分析→语音功能→社区协作",
-        "marketOpportunity": "神经多样性家庭服务市场，年规模45-60亿",
+        "developmentStrategy": "情感识别→沟通分析→个性化建议→家庭协作",
+        "marketOpportunity": "特殊需求家庭市场，社会关注度高",
         "riskLevel": "中高",
-        "estimatedTimeline": "6-8个月完成MVP",
-        "notes": "儿童隐私保护要求极高，需要专业医疗团队支持"
+        "notes": "情感识别准确率要求高，伦理考虑重要"
       }
-    }
+    },
     "ai-collaboration-inspiration-engine": {
       "name": "AI协作灵感引擎",
       "file": "ai-collaboration-inspiration-engine.md",
@@ -1024,7 +1025,7 @@
           "developmentCost": 7,
           "commercialPotential": 8
         },
-        "totalScore": 8.0,
+        "totalScore": 8,
         "priority": 3,
         "evaluationDate": "2026-04-02T02:30:00Z",
         "evaluation": {
@@ -1175,7 +1176,7 @@
         "developmentCost": 8,
         "commercialPotential": 8
       },
-      "totalScore": 8.0,
+      "totalScore": 8,
       "summary": "AI驱动的个性化语言学习助手，提供沉浸式语言训练和文化体验",
       "priority": 3,
       "evaluationDate": "2026-04-02T01:00:00Z",
@@ -1197,7 +1198,7 @@
     "ai-resume-doctor": {
       "name": "AI简历诊断师",
       "file": "prs/0140-ai-resume-doctor.md",
-      "status": "new",
+      "status": "high-value",
       "scores": {
         "technicalFeasibility": 8,
         "marketDemand": 10,
@@ -1208,7 +1209,7 @@
       "totalScore": 8.4,
       "summary": "海投简历诊断工具，3秒精准分析，对标JD匹配度，改3版拿5个面试",
       "priority": 1,
-      "evaluationDate": "2026-04-02T01:00:00Z",
+      "evaluationDate": "2026-04-03T02:30:00Z",
       "evaluation": {
         "evaluator": "孔明",
         "keyStrengths": [
@@ -1283,40 +1284,10 @@
         "notes": "视觉AI技术要求高，需考虑时尚敏感性"
       }
     },
-    "ai-neurodiversity-family-ai": {
-      "name": "AI神经多样性家庭助手",
-      "file": "prs/0308-ai-neurodiversity-family-ai.md",
-      "status": "new",
-      "scores": {
-        "technicalFeasibility": 7,
-        "marketDemand": 9,
-        "innovation": 9,
-        "developmentCost": 6,
-        "commercialPotential": 8
-      },
-      "totalScore": 7.8,
-      "summary": "为神经多样性家庭提供AI支持的沟通和协作工具，促进家庭和谐",
-      "priority": null,
-      "evaluationDate": "2026-04-02T01:00:00Z",
-      "evaluation": {
-        "evaluator": "孔明",
-        "keyStrengths": [
-          "社会价值显著",
-          "技术需求明确",
-          "家庭场景特殊",
-          "AI情感识别",
-          "个性化支持"
-        ],
-        "developmentStrategy": "情感识别→沟通分析→个性化建议→家庭协作",
-        "marketOpportunity": "特殊需求家庭市场，社会关注度高",
-        "riskLevel": "中高",
-        "notes": "情感识别准确率要求高，伦理考虑重要"
-      }
-    },
     "ai-nursing-assistant": {
       "name": "AI护理助手",
       "file": "prs/0304-ai-nursing-assistant.md",
-      "status": "new",
+      "status": "high-value",
       "scores": {
         "technicalFeasibility": 8,
         "marketDemand": 9,
@@ -1324,10 +1295,10 @@
         "developmentCost": 7,
         "commercialPotential": 8
       },
-      "totalScore": 8.0,
+      "totalScore": 8,
       "summary": "AI驱动的家庭护理助手，为老人和特殊需求人群提供专业护理指导",
-      "priority": null,
-      "evaluationDate": "2026-04-02T01:00:00Z",
+      "priority": 2,
+      "evaluationDate": "2026-04-03T02:30:00Z",
       "evaluation": {
         "evaluator": "孔明",
         "keyStrengths": [
@@ -1412,7 +1383,7 @@
         "developmentCost": 7,
         "commercialPotential": 8
       },
-      "totalScore": 8.0,
+      "totalScore": 8,
       "summary": "基于MCP协议的AI代码安全审计工具，实时检测和修复代码安全问题",
       "priority": null,
       "evaluationDate": "2026-04-02T01:00:00Z",
@@ -1488,66 +1459,6 @@
         "marketOpportunity": "语言学习市场，创新模式需求强",
         "riskLevel": "中等",
         "notes": "场景构建复杂度较高，需要大量内容，编码问题需要解决"
-      }
-    },
-    "ai-resume-doctor": {
-      "name": "AI简历诊断师",
-      "file": "prs/0140-ai-resume-doctor.md",
-      "status": "high-value",
-      "scores": {
-        "technicalFeasibility": 8,
-        "marketDemand": 10,
-        "innovation": 8,
-        "developmentCost": 7,
-        "commercialPotential": 9
-      },
-      "totalScore": 8.4,
-      "summary": "海投简历诊断工具，3秒精准分析，对标JD匹配度，改3版拿5个面试",
-      "priority": 1,
-      "evaluationDate": "2026-04-03T02:30:00Z",
-      "evaluation": {
-        "evaluator": "孔明",
-        "keyStrengths": [
-          "秒级诊断能力",
-          "JD对标分析",
-          "改前改后对比",
-          "中国本土化",
-          "效果追踪闭环"
-        ],
-        "developmentStrategy": "诊断引擎→JD匹配→对比预览→行业定制→效果追踪",
-        "marketOpportunity": "求职服务市场，8000万+年度求职者",
-        "riskLevel": "中低",
-        "estimatedTimeline": "3-5个月完成MVP"
-      }
-    },
-    "ai-nursing-assistant": {
-      "name": "AI护理助手",
-      "file": "prs/0304-ai-nursing-assistant.md",
-      "status": "high-value",
-      "scores": {
-        "technicalFeasibility": 8,
-        "marketDemand": 9,
-        "innovation": 8,
-        "developmentCost": 7,
-        "commercialPotential": 8
-      },
-      "totalScore": 8.0,
-      "summary": "AI驱动的家庭护理助手，为老人和特殊需求人群提供专业护理指导",
-      "priority": 2,
-      "evaluationDate": "2026-04-03T02:30:00Z",
-      "evaluation": {
-        "evaluator": "孔明",
-        "keyStrengths": [
-          "老龄化社会需求",
-          "专业护理知识",
-          "AI健康监测",
-          "家庭关怀功能",
-          "医疗知识库"
-        ],
-        "developmentStrategy": "健康监测→护理指导→家庭协作→医疗对接",
-        "marketOpportunity": "养老科技市场，政策支持力度大",
-        "riskLevel": "中等",
-        "notes": "医疗准确性要求高，需专业医疗支持"
       }
     }
   },
@@ -2145,7 +2056,6 @@
         "next": [
           "CI/CD pipeline implementation",
           "Production deployment to npm",
-
           "User feedback collection system",
           "Error database integration",
           "Advanced error pattern recognition",
