@@ -1,0 +1,76 @@
+{
+  "lastMetricsUpdate": "2026-04-12T20:24:27Z",
+  "collectionTime": "2026-04-12T20:24:27Z",
+  "stats": {
+    "totalProjects": 59,
+    "highValueProjects": 11,
+    "completedProjects": 10,
+    "inProgressProjects": 1,
+    "newProjects": 13,
+    "averageScore": 7.7,
+    "completionRate": 0.169,
+    "highValueRate": 0.186
+  },
+  "gitActivity": {
+    "commits24h": 0,
+    "commits7d": 54,
+    "commits14d": 69,
+    "commits30d": 82,
+    "linesAdded7d": 6547381,
+    "linesDeleted7d": 33352,
+    "branchesCount": 3,
+    "contributors24h": 0
+  },
+  "projectStatus": {
+    "completed": 10,
+    "inProgress": 1,
+    "new": 13,
+    "highValue": 11,
+    "mediumValue": 3,
+    "skipped": 19,
+    "lowValue": 13
+  },
+  "topProjects": {
+    "completed": [
+      {
+        "name": "AI预约管家",
+        "status": "生产就绪",
+        "completedAt": "2026-03-30T18:45:00Z"
+      },
+      {
+        "name": "AI碳足迹追踪器", 
+        "status": "生产就绪",
+        "completedAt": "2026-03-30T08:45:00Z"
+      },
+      {
+        "name": "AI职业软技能导师",
+        "status": "生产就绪", 
+        "completedAt": "2026-03-29T02:30:00Z"
+      }
+    ],
+    "highValue": [
+      {
+        "name": "AI个人成长教练",
+        "score": 8.4,
+        "priority": 1
+      },
+      {
+        "name": "AI简历诊断师",
+        "score": 8.4,
+        "priority": 1
+      },
+      {
+        "name": "AI音乐创作智能伙伴",
+        "score": 8.2,
+        "priority": 2
+      }
+    ]
+  },
+  "trends": {
+    "codeGrowthRate": "极高",
+    "commitActivity": "稳定",
+    "developmentEfficiency": "良好",
+    "projectQuality": "高"
+  },
+  "nextTrackingTime": "2026-04-12T22:24:27Z"
+}
