@@ -1,0 +1,78 @@
+# NeuroLink BCI Requirements
+# 深度学习框架
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.24.0
+scikit-learn>=1.3.0
+
+# 信号处理
+scipy>=1.11.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+pywt>=1.4.0  # 小波变换
+
+# 神经网络
+transformers>=4.35.0
+tensorboard>=2.13.0
+
+# 硬件接口
+pyserial>=3.5
+bleak>=0.21.0  # 蓝牙 Low Energy
+python-can>=4.0  # CAN总线（如果需要）
+
+# 实时处理
+asyncio>=3.4.0
+aiohttp>=3.8.0
+websockets>=11.0
+
+# 数据处理
+pandas>=2.1.0
+h5py>=3.9.0
+zarr>=2.18.0
+
+# 安全和隐私
+cryptography>=41.0.0
+pyjwt>=2.8.0
+python-keycloak>=3.4.0
+
+# 监控和日志
+prometheus-client>=0.17.0
+structlog>=23.1.0
+python-json-logger>=2.0.0
+
+# 测试
+pytest>=7.4.0
+pytest-cov>=4.1.0
+mock>=5.1.0
+
+# 开发工具
+black>=23.7.0
+flake8>=6.0.0
+mypy>=1.5.0
+pre-commit>=3.3.0
+
+# 数据验证
+jsonschema>=4.19.0
+pydantic>=2.3.0
+
+# 文档生成
+sphinx>=7.2.0
+sphinx-rtd-theme>=1.3.0
+mkdocs>=1.5.0
+
+# 性能优化
+numba>=0.58.0
+joblib>=1.3.0
+
+# 配置管理
+python-dotenv>=1.0.0
+click>=8.1.0
+
+# 数据存储
+redis>=4.6.0
+sqlalchemy>=2.0.0
+
+# 其他工具
+tqdm>=4.65.0
+python-dateutil>=2.8.0
+requests>=2.31.0
