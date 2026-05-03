@@ -1,0 +1,92 @@
+# MedVision AI Requirements
+# 核心深度学习框架
+torch>=2.0.0
+torchvision>=0.15.0
+tensorflow>=2.13.0
+scikit-learn>=1.3.0
+
+# 医学图像处理
+pydicom>=2.4.0
+SimpleITK>=2.3.0
+opencv-python>=4.8.0
+Pillow>=10.0.0
+
+# 自然语言处理
+transformers>=4.35.0
+torchtext>=0.16.0
+spacy>=3.7.0
+nltk>=3.8.0
+
+# 数据处理和分析
+pandas>=2.1.0
+numpy>=1.24.0
+scipy>=1.11.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# 医学知识图谱
+neo4j>=5.0.0
+networkx>=3.1.0
+
+# API和部署
+fastapi>=0.100.0
+uvicorn>=0.23.0
+docker>=6.1.0
+kubernetes>=27.2.0
+
+# 数据库
+redis>=4.6.0
+psycopg2-binary>=2.9.0
+sqlalchemy>=2.0.0
+
+# 安全和隐私
+cryptography>=41.0.0
+pyjwt>=2.8.0
+python-keycloak>=3.4.0
+
+# 监控和日志
+prometheus-client>=0.17.0
+structlog>=23.1.0
+python-json-logger>=2.0.0
+
+# 测试
+pytest>=7.4.0
+pytest-cov>=4.1.0
+mock>=5.1.0
+
+# 开发工具
+black>=23.7.0
+flake8>=6.0.0
+mypy>=1.5.0
+pre-commit>=3.3.0
+
+# 医疗标准
+hl7-parser>=1.0.0
+fhir.resources>=6.0.0
+
+# 性能优化
+numba>=0.58.0
+joblib>=1.3.0
+
+# 配置管理
+python-dotenv>=1.0.0
+pydantic>=2.3.0
+
+# 异步处理
+asyncio-mqtt>=0.16.0
+aiohttp>=3.8.0
+celery>=5.3.0
+
+# 数据验证
+jsonschema>=4.19.0
+marshmallow>=3.20.0
+
+# 文档生成
+sphinx>=7.2.0
+sphinx-rtd-theme>=1.3.0
+mkdocs>=1.5.0
+
+# 其他工具
+tqdm>=4.65.0
+python-dateutil>=2.8.0
+requests>=2.31.0
